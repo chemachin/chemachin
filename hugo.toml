@@ -16,3 +16,4 @@ theme = 'gallery'
     name = "Contact"
     url = "/contact/"
     weight = 3
+    
