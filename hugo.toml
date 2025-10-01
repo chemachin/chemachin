@@ -1,4 +1,4 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://github.com/chemachin/chemachin'
 languageCode = 'en-us'
 title = 'Chemachin'
 theme = 'gallery'
