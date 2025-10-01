@@ -1,7 +1,10 @@
-baseURL = 'https://github.com/chemachin/chemachin'
+baseURL = 'https://chemachin.github.io/chemachin/'
 languageCode = 'en-us'
 title = 'Chemachin'
 theme = 'gallery'
+relativeURLs = true
+canonifyURLs = true
+
 
 [menu]
   [[menu.main]]
