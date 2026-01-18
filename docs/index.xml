@@ -2,9 +2,9 @@
 <rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Chemachin</title>
-    <link>https://chemachin.github.io/chemachin/</link>
+    <link>https://chemachin.es/</link>
     <description>Recent content on Chemachin</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://chemachin.github.io/chemachin/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language><atom:link href="https://chemachin.es/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

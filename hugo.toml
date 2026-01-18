@@ -4,6 +4,7 @@ title = 'Chemachin'
 theme = 'gallery'
 relativeURLs = false
 canonifyURLs = false
+publishDir = 'docs'
 
 
 [menu]
