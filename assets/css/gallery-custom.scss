@@ -1,0 +1,54 @@
+/* Custom gallery styling for large images with scroll */
+section.gallery {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+#gallery {
+  visibility: hidden !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  display: none !important;
+}
+
+.gallery-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  padding: 2rem 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.gallery-item {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+
+  figure {
+    margin: 0;
+    width: 100%;
+    aspect-ratio: 16/10;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+@media (min-width: 768px) {
+  .gallery-item {
+    aspect-ratio: 16/10;
+  }
+}
