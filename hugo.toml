@@ -5,23 +5,41 @@ theme = 'gallery'
 relativeURLs = false
 canonifyURLs = false
 publishDir = 'docs'
+defaultContentLanguage = 'en'
 
-[params]
-  [params.socialIcons]
-    instagram = "https://instagram.com/chema.chin"
-    github = "https://github.com/chemachin"
-    email = "mailto:chemachin@gmail.com"
-    # twitter = "https://twitter.com/tu_usuario"
-    # youtube = "https://youtube.com/@tu_canal"
-    # Otras opciones disponibles: facebook, mastodon, pixelfed, linkedin, mixcloud, flickr, 500px
-
-
-[menu]
-  [[menu.main]]
-    name = "Home"
-    url = "/"
+[languages]
+  [languages.en]
+    languageName = "English"
     weight = 1
-  [[menu.main]]
-    name = "About"
-    url = "/about/"
+    [languages.en.params]
+      [languages.en.params.socialIcons]
+        instagram = "https://instagram.com/chema.chin"
+        github = "https://github.com/chemachin"
+        email = "mailto:chemachin@gmail.com"
+    [languages.en.menu]
+      [[languages.en.menu.main]]
+        name = "Home"
+        url = "/"
+        weight = 1
+      [[languages.en.menu.main]]
+        name = "About"
+        url = "/about/"
+        weight = 2
+
+  [languages.es]
+    languageName = "Español"
     weight = 2
+    [languages.es.params]
+      [languages.es.params.socialIcons]
+        instagram = "https://instagram.com/chema.chin"
+        github = "https://github.com/chemachin"
+        email = "mailto:chemachin@gmail.com"
+    [languages.es.menu]
+      [[languages.es.menu.main]]
+        name = "Inicio"
+        url = "/es/"
+        weight = 1
+      [[languages.es.menu.main]]
+        name = "Acerca de"
+        url = "/es/about/"
+        weight = 2
