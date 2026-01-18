@@ -25,22 +25,22 @@ title = "Photo 4"
 weight = 4
 
 [[resources]]
-src = "_DSC2856.jpg"
+src = "006.jpg"
 title = "Photo 5"
 weight = 5
 
 [[resources]]
-src = "_DSC5326.jpg"
+src = "007.jpg"
 title = "Photo 6"
 weight = 6
 
 [[resources]]
-src = "_DSC5814.jpg"
+src = "008.jpg"
 title = "Photo 7"
 weight = 7
 
 [[resources]]
-src = "_DSC5970.jpg"
+src = "009.jpg"
 title = "Photo 8"
 weight = 8
 +++
