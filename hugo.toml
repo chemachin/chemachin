@@ -6,6 +6,14 @@ relativeURLs = false
 canonifyURLs = false
 publishDir = 'docs'
 
+[params]
+  [params.socialIcons]
+    instagram = "https://instagram.com/chema.chin"
+    github = "https://github.com/chemachin"
+    # twitter = "https://twitter.com/tu_usuario"
+    # youtube = "https://youtube.com/@tu_canal"
+    # Otras opciones disponibles: facebook, mastodon, pixelfed, linkedin, email, mixcloud, flickr, 500px
+
 
 [menu]
   [[menu.main]]
