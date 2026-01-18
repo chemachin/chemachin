@@ -10,9 +10,10 @@ publishDir = 'docs'
   [params.socialIcons]
     instagram = "https://instagram.com/chema.chin"
     github = "https://github.com/chemachin"
+    email = "mailto:chemachin@gmail.com"
     # twitter = "https://twitter.com/tu_usuario"
     # youtube = "https://youtube.com/@tu_canal"
-    # Otras opciones disponibles: facebook, mastodon, pixelfed, linkedin, email, mixcloud, flickr, 500px
+    # Otras opciones disponibles: facebook, mastodon, pixelfed, linkedin, mixcloud, flickr, 500px
 
 
 [menu]
@@ -24,7 +25,3 @@ publishDir = 'docs'
     name = "About"
     url = "/about/"
     weight = 2
-  [[menu.main]]
-    name = "Contact"
-    url = "/contact/"
-    weight = 3
