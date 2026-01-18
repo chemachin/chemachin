@@ -2,8 +2,8 @@ baseURL = 'https://chemachin.es/'
 languageCode = 'en-us'
 title = 'Chemachin'
 theme = 'gallery'
-relativeURLs = true
-canonifyURLs = true
+relativeURLs = false
+canonifyURLs = false
 
 
 [menu]
