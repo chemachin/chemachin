@@ -6,6 +6,16 @@
     <description>Recent content in Home on Chemachin</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate></lastBuildDate><atom:link href="https://chemachin.es/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 19 Jan 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://chemachin.es/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Photos</title>
+      <link>https://chemachin.es/gallery/fotos/</link>
+      <pubDate>Fri, 19 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>https://chemachin.es/gallery/fotos/</guid>
+        <media:content url="https://chemachin.es/gallery/fotos/001_hu_31083458c2c3c73e.jpg" type="image/jpeg"/>
+        <description>
+          &lt;img src=&quot;https://chemachin.es/gallery/fotos/001_hu_31083458c2c3c73e.jpg&quot; /&gt;
+          &lt;p&gt;&lt;no value&gt;&lt;/p&gt;
+        </description></item>
   </channel>
 </rss>
