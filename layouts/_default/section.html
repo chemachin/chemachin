@@ -72,10 +72,12 @@
 
     .lightbox-content {
       position: relative;
-      max-width: 95vw;
-      max-height: 95vh;
+      max-width: 85vw;
+      max-height: 85vh;
       animation: zoomIn 0.3s;
-      overflow: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .lightbox-content img {
@@ -84,8 +86,7 @@
       height: auto;
       width: auto;
       border-radius: 0.5rem;
-      display: block;
-      margin: auto;
+      object-fit: scale-down;
     }
 
     .lightbox-close {
