@@ -6,8 +6,8 @@
       display: grid;
       grid-template-columns: 1fr;
       gap: 3rem;
-      padding: 3rem 1.5rem;
-      max-width: 1050px;
+      padding: 3rem;
+      max-width: 1300px;
       margin: 0 auto;
     }
 
@@ -15,7 +15,7 @@
       display: flex;
       flex-direction: column;
       cursor: pointer;
-      border-radius: 1rem;
+      border-radius: 1.2rem;
       overflow: hidden;
       transition: all 0.3s ease;
       text-decoration: none;
@@ -49,7 +49,7 @@
   {{ if .Resources.ByType "image" }}
     <section class="gallery-container">
       {{ range $image := where (.Resources.ByType "image") "Params.hidden" "ne" true }}
-        {{ $thumbnail := $image.Filter (slice images.AutoOrient (images.Process "fit 1050x700")) }}
+        {{ $thumbnail := $image.Filter (slice images.AutoOrient (images.Process "fit 1240x827")) }}
         <a class="gallery-item" href="{{ $image.RelPermalink }}" data-pswp-src="{{ $image.RelPermalink }}" data-pswp-width="{{ $image.Width }}" data-pswp-height="{{ $image.Height }}" title="{{ .Title }}">
           <figure>
             <img src="{{ $thumbnail.RelPermalink }}" alt="{{ .Title }}" />
