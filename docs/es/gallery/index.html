@@ -136,68 +136,207 @@
     .gallery-item:hover img {
       transform: scale(1.05);
     }
+
+     
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      animation: fadeIn 0.3s;
+    }
+
+    .lightbox.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+      animation: zoomIn 0.3s;
+    }
+
+    .lightbox-content img {
+      width: 100%;
+      height: auto;
+      border-radius: 0.5rem;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    .lightbox-close:hover {
+      color: #ccc;
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 10px 15px;
+      border-radius: 5px;
+      z-index: 1001;
+    }
+
+    .lightbox-prev {
+      left: 20px;
+    }
+
+    .lightbox-next {
+      right: 20px;
+    }
+
+    .lightbox-nav:hover {
+      background: rgba(0, 0, 0, 0.8);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.8); }
+      to { transform: scale(1); }
+    }
   </style>
   
   
     <section class="gallery-container">
       
         
-        <a class="gallery-item" href="/gallery/1.jpg" data-pswp-src="/gallery/1.jpg" data-pswp-width="7952" data-pswp-height="5304" title="Foto 1">
+        <a class="gallery-item" href="#" data-lightbox="0" data-src="/gallery/1.jpg">
           <figure>
             <img src="/gallery/1_hu_89922805cc41afb7.jpg" alt="Foto 1" />
           </figure>
         </a>
       
         
-        <a class="gallery-item" href="/gallery/2.jpg" data-pswp-src="/gallery/2.jpg" data-pswp-width="5168" data-pswp-height="3448" title="Foto 2">
+        <a class="gallery-item" href="#" data-lightbox="1" data-src="/gallery/2.jpg">
           <figure>
             <img src="/gallery/2_hu_295d07c726c2fc62.jpg" alt="Foto 2" />
           </figure>
         </a>
       
         
-        <a class="gallery-item" href="/gallery/3.jpg" data-pswp-src="/gallery/3.jpg" data-pswp-width="5168" data-pswp-height="3448" title="Foto 3">
+        <a class="gallery-item" href="#" data-lightbox="2" data-src="/gallery/3.jpg">
           <figure>
             <img src="/gallery/3_hu_72c8bcc938c77ab5.jpg" alt="Foto 3" />
           </figure>
         </a>
       
         
-        <a class="gallery-item" href="/gallery/4.jpg" data-pswp-src="/gallery/4.jpg" data-pswp-width="5168" data-pswp-height="3448" title="Foto 4">
+        <a class="gallery-item" href="#" data-lightbox="3" data-src="/gallery/4.jpg">
           <figure>
             <img src="/gallery/4_hu_60c74b6439693c48.jpg" alt="Foto 4" />
           </figure>
         </a>
       
         
-        <a class="gallery-item" href="/gallery/5.jpg" data-pswp-src="/gallery/5.jpg" data-pswp-width="7952" data-pswp-height="5304" title="Foto 5">
+        <a class="gallery-item" href="#" data-lightbox="4" data-src="/gallery/5.jpg">
           <figure>
             <img src="/gallery/5_hu_add6a2b412472f23.jpg" alt="Foto 5" />
           </figure>
         </a>
       
         
-        <a class="gallery-item" href="/gallery/6.jpg" data-pswp-src="/gallery/6.jpg" data-pswp-width="7952" data-pswp-height="5304" title="Foto 6">
+        <a class="gallery-item" href="#" data-lightbox="5" data-src="/gallery/6.jpg">
           <figure>
             <img src="/gallery/6_hu_cfc1c957b6cb0312.jpg" alt="Foto 6" />
           </figure>
         </a>
       
         
-        <a class="gallery-item" href="/gallery/7.jpg" data-pswp-src="/gallery/7.jpg" data-pswp-width="7826" data-pswp-height="5220" title="Foto 7">
+        <a class="gallery-item" href="#" data-lightbox="6" data-src="/gallery/7.jpg">
           <figure>
             <img src="/gallery/7_hu_f5e23f7fcf98cca4.jpg" alt="Foto 7" />
           </figure>
         </a>
       
         
-        <a class="gallery-item" href="/gallery/8.jpg" data-pswp-src="/gallery/8.jpg" data-pswp-width="7952" data-pswp-height="5304" title="Foto 8">
+        <a class="gallery-item" href="#" data-lightbox="7" data-src="/gallery/8.jpg">
           <figure>
             <img src="/gallery/8_hu_c3a9d94e49f5415f.jpg" alt="Foto 8" />
           </figure>
         </a>
       
     </section>
+
+    
+    <div id="lightbox" class="lightbox">
+      <div class="lightbox-content">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <span class="lightbox-nav lightbox-prev" onclick="prevImage()">&#10094;</span>
+        <img id="lightbox-img" src="" alt="">
+        <span class="lightbox-nav lightbox-next" onclick="nextImage()">&#10095;</span>
+      </div>
+    </div>
+
+    <script>
+      let currentIndex = 0;
+      const images = document.querySelectorAll('.gallery-item');
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+
+      images.forEach((img, index) => {
+        img.addEventListener('click', (e) => {
+          e.preventDefault();
+          currentIndex = index;
+          showImage(index);
+        });
+      });
+
+      function showImage(index) {
+        lightboxImg.src = images[index].getAttribute('data-src');
+        lightbox.classList.add('active');
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('active');
+      }
+
+      function nextImage() {
+        currentIndex = (currentIndex + 1) % images.length;
+        showImage(currentIndex);
+      }
+
+      function prevImage() {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        showImage(currentIndex);
+      }
+
+      
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+
+      
+      document.addEventListener('keydown', (e) => {
+        if (lightbox.classList.contains('active')) {
+          if (e.key === 'ArrowRight') nextImage();
+          if (e.key === 'ArrowLeft') prevImage();
+          if (e.key === 'Escape') closeLightbox();
+        }
+      });
+    </script>
   
   
   
