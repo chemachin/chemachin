@@ -54,7 +54,7 @@
   
   {{ if .Resources.ByType "image" }}
     <section class="gallery-container">
-      {{ range $image := where (.Resources.ByType "image") "Params.hidden" "ne" true }}
+      {{ range $image := where (.Resources.ByType "image" | .ByWeight) "Params.hidden" "ne" true }}
         {{ $thumbnail := $image.Filter (slice images.AutoOrient (images.Process "fit 760x507")) }}
         <a class="gallery-item" href="{{ $image.RelPermalink }}" data-pswp-src="{{ $image.RelPermalink }}" data-pswp-width="{{ $image.Width }}" data-pswp-height="{{ $image.Height }}" title="{{ .Title }}">
           <figure>
