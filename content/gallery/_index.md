@@ -5,42 +5,42 @@ weight = 1
 sort_by = "Params.weight"
 
 [[resources]]
-src = "009.jpg"
+src = "1.jpg"
 title = "Photo 1"
 weight = 1
 
 [[resources]]
-src = "007.jpg"
+src = "2.jpg"
 title = "Photo 2"
 weight = 2
 
 [[resources]]
-src = "006.jpg"
+src = "3.jpg"
 title = "Photo 3"
 weight = 3
 
 [[resources]]
-src = "008.jpg"
+src = "4.jpg"
 title = "Photo 4"
 weight = 4
 
 [[resources]]
-src = "005.JPG"
+src = "5.jpg"
 title = "Photo 5"
 weight = 5
 
 [[resources]]
-src = "002.jpg"
+src = "6.jpg"
 title = "Photo 6"
 weight = 6
 
 [[resources]]
-src = "003.jpg"
+src = "7.jpg"
 title = "Photo 7"
 weight = 7
 
 [[resources]]
-src = "001.jpg"
+src = "8.jpg"
 title = "Photo 8"
 weight = 8
 +++
