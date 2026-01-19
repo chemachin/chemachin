@@ -7,7 +7,7 @@
       grid-template-columns: 1fr;
       gap: 2rem;
       padding: 2rem 1.5rem;
-      max-width: 100%;
+      max-width: 800px;
       margin: 0 auto;
     }
 
@@ -28,7 +28,7 @@
     .gallery-item figure {
       margin: 0;
       width: 100%;
-      aspect-ratio: 16/10;
+      aspect-ratio: 4/3;
     }
 
     .gallery-item img {
@@ -42,7 +42,7 @@
   {{ if .Resources.ByType "image" }}
     <section class="gallery-container">
       {{ range $image := where (.Resources.ByType "image") "Params.hidden" "ne" true }}
-        {{ $thumbnail := $image.Filter (slice images.AutoOrient (images.Process "fit 1200x750")) }}
+        {{ $thumbnail := $image.Filter (slice images.AutoOrient (images.Process "fit 800x600")) }}
         <a class="gallery-item" href="{{ $image.RelPermalink }}" data-pswp-src="{{ $image.RelPermalink }}" data-pswp-width="{{ $image.Width }}" data-pswp-height="{{ $image.Height }}" title="{{ .Title }}">
           <figure>
             <img src="{{ $thumbnail.RelPermalink }}" alt="{{ .Title }}" />
