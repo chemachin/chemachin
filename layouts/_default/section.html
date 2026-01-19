@@ -54,9 +54,9 @@
   
   {{ if .Resources.ByType "image" }}
     <section class="gallery-container">
-      {{ range $image := where (.Resources.ByType "image" | .ByWeight) "Params.hidden" "ne" true }}
-        {{ $thumbnail := $image.Filter (slice images.AutoOrient (images.Process "fit 760x507")) }}
-        <a class="gallery-item" href="{{ $image.RelPermalink }}" data-pswp-src="{{ $image.RelPermalink }}" data-pswp-width="{{ $image.Width }}" data-pswp-height="{{ $image.Height }}" title="{{ .Title }}">
+      {{ range (.Resources.ByType "image") }}
+        {{ $thumbnail := .Filter (slice images.AutoOrient (images.Process "fit 760x507")) }}
+        <a class="gallery-item" href="{{ .RelPermalink }}" data-pswp-src="{{ .RelPermalink }}" data-pswp-width="{{ .Width }}" data-pswp-height="{{ .Height }}" title="{{ .Title }}">
           <figure>
             <img src="{{ $thumbnail.RelPermalink }}" alt="{{ .Title }}" />
           </figure>
