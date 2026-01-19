@@ -73,11 +73,17 @@
   <style>
     .gallery-container {
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, 1fr);
       gap: 3rem;
       padding: 3rem;
       max-width: 1400px;
       margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      .gallery-container {
+        grid-template-columns: 1fr;
+      }
     }
 
     .gallery-item {
