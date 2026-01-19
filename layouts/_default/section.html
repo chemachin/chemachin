@@ -5,9 +5,9 @@
     .gallery-container {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 2rem;
-      padding: 2rem 1.5rem;
-      max-width: 800px;
+      gap: 3rem;
+      padding: 3rem 1.5rem;
+      max-width: 950px;
       margin: 0 auto;
     }
 
@@ -15,20 +15,22 @@
       display: flex;
       flex-direction: column;
       cursor: pointer;
-      border-radius: 0.5rem;
+      border-radius: 1rem;
       overflow: hidden;
-      transition: transform 0.3s ease;
+      transition: all 0.3s ease;
       text-decoration: none;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     }
 
     .gallery-item:hover {
-      transform: scale(1.02);
+      transform: translateY(-8px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
     }
 
     .gallery-item figure {
       margin: 0;
       width: 100%;
-      aspect-ratio: 4/3;
+      aspect-ratio: 16/9;
     }
 
     .gallery-item img {
@@ -36,13 +38,18 @@
       height: 100%;
       object-fit: cover;
       display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
     }
   </style>
   
   {{ if .Resources.ByType "image" }}
     <section class="gallery-container">
       {{ range $image := where (.Resources.ByType "image") "Params.hidden" "ne" true }}
-        {{ $thumbnail := $image.Filter (slice images.AutoOrient (images.Process "fit 800x600")) }}
+        {{ $thumbnail := $image.Filter (slice images.AutoOrient (images.Process "fit 950x535")) }}
         <a class="gallery-item" href="{{ $image.RelPermalink }}" data-pswp-src="{{ $image.RelPermalink }}" data-pswp-width="{{ $image.Width }}" data-pswp-height="{{ $image.Height }}" title="{{ .Title }}">
           <figure>
             <img src="{{ $thumbnail.RelPermalink }}" alt="{{ .Title }}" />
