@@ -5,9 +5,9 @@
     .gallery-container {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 3rem;
-      padding: 3rem;
-      max-width: 1400px;
+      gap: 2rem;
+      padding: 2rem;
+      max-width: 1600px;
       margin: 0 auto;
     }
 
@@ -55,7 +55,7 @@
   {{ if .Resources.ByType "image" }}
     <section class="gallery-container">
       {{ range $image := where (.Resources.ByType "image") "Params.hidden" "ne" true }}
-        {{ $thumbnail := $image.Filter (slice images.AutoOrient (images.Process "fit 670x447")) }}
+        {{ $thumbnail := $image.Filter (slice images.AutoOrient (images.Process "fit 760x507")) }}
         <a class="gallery-item" href="{{ $image.RelPermalink }}" data-pswp-src="{{ $image.RelPermalink }}" data-pswp-width="{{ $image.Width }}" data-pswp-height="{{ $image.Height }}" title="{{ .Title }}">
           <figure>
             <img src="{{ $thumbnail.RelPermalink }}" alt="{{ .Title }}" />
