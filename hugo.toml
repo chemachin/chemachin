@@ -39,6 +39,7 @@ defaultContentLanguage = 'en'
         instagram = "https://instagram.com/chema.chin"
         github = "https://github.com/chemachin"
         email = "mailto:chemachin@gmail.com"
+        linkedin = "https://www.linkedin.com/in/josé-maría-moreno-retamero-1211bb130/"
     [languages.es.menu]
       [[languages.es.menu.main]]
         name = "Inicio"
