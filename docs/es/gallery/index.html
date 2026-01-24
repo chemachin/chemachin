@@ -46,7 +46,25 @@
 
   <body>
     <header style="width: 100%; position: relative;">
-  <nav style="width: 100%; display: flex !important; justify-content: center !important; align-items: center !important; position: relative;">
+  <style>
+    @media (max-width: 768px) {
+      .top-menu {
+        flex-wrap: wrap !important;
+        gap: 0.5em !important;
+      }
+      .top-menu li {
+        margin: 0.25em 0.5em !important;
+      }
+      .top-menu a {
+        font-size: 0.9em !important;
+      }
+      .lang-switcher {
+        font-size: 1.2em !important;
+        gap: 0.5em !important;
+      }
+    }
+  </style>
+  <nav style="width: 100%; display: flex !important; justify-content: center !important; align-items: center !important; position: relative; flex-wrap: wrap !important; padding: 0.5em !important;">
     <ul class="top-menu"
         style="display: flex !important; justify-content: center !important; align-items: center !important; list-style: none !important; padding: 0 !important; margin: 0 !important;">
       
@@ -69,7 +87,7 @@
         </li>
       
     </ul>
-    <div style="position: absolute !important; right: 1em !important; display: flex !important; gap: 1em !important; font-size: 1.5em !important;">
+    <div class="lang-switcher" style="position: absolute !important; right: 1em !important; display: flex !important; gap: 1em !important; font-size: 1.5em !important;">
       
         <a href="/" style="text-decoration: none !important; opacity: 0.6 !important; transition: opacity 0.3s !important;">🇬🇧</a>
         <span style="opacity: 1 !important;">🇪🇸</span>
@@ -100,6 +118,8 @@
     @media (max-width: 768px) {
       .gallery-container {
         grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 1rem;
       }
     }
 
