@@ -1,2 +1,8 @@
 # Keep original full-size images private (not in repo)
 private-originals/
+
+# Don't commit full-size images to repo (Hugo uses these locally for thumbnails)
+content/gallery/*.jpg
+content/gallery/*.JPG
+content/gallery/*.jpeg
+content/gallery/*.png
