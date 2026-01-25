@@ -158,7 +158,9 @@
     <section class="gallery-container">
       {{ range $index, $image := (.Resources.ByType "image") }}
         {{ $thumbnail := .Filter (slice images.AutoOrient (images.Process "fit 760x507")) }}
-        <a class="gallery-item" href="#" data-lightbox="{{ $index }}" data-src="{{ .RelPermalink }}">
+        {{/* Use watermarked version for lightbox downloads */}}
+        {{ $watermarkedPath := printf "/gallery-watermarked/%s" .Name }}
+        <a class="gallery-item" href="#" data-lightbox="{{ $index }}" data-src="{{ $watermarkedPath }}">
           <figure>
             <img src="{{ $thumbnail.RelPermalink }}" alt="{{ .Title }}" />
           </figure>
