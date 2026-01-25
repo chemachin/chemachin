@@ -155,27 +155,14 @@
   </style>
   
   {{ if .Resources.ByType "image" }}
-    {{/* Create watermarked versions for lightbox using text overlay */}}
-    {{ $wmText := "<svg xmlns='http://www.w3.org/2000/svg' width='1000' height='500'><style>text { font-family: Arial, sans-serif; font-size: 200px; font-weight: 900; fill: rgba(255,255,255,0.25); text-anchor: middle; }</style><text x='500' y='250' dominant-baseline='middle'>CHEMACHIN</text></svg>" }}
-    {{ $wm := resources.FromString "watermark-text.svg" $wmText }}
     <section class="gallery-container">
       {{ range $index, $image := (.Resources.ByType "image") }}
-        {{/* Only apply watermark overlay to raster images (JPG/PNG), not SVG */}}
-        {{ if or (eq .MediaType.SubType "jpeg") (eq .MediaType.SubType "png") }}
-          {{ $thumbnail := .Filter (slice images.AutoOrient (images.Process "fit 760x507")) }}
-          {{ $lightboxImg := .Filter (slice images.AutoOrient (images.Process "fit 1400x933") (images.Overlay $wm 0 0)) }}
-          <a class="gallery-item" href="#" data-lightbox="{{ $index }}" data-src="{{ $lightboxImg.RelPermalink }}">
-            <figure>
-              <img src="{{ $thumbnail.RelPermalink }}" alt="{{ .Title }}" />
-            </figure>
-          </a>
-        {{ else }}
-          <a class="gallery-item" href="#" data-lightbox="{{ $index }}" data-src="{{ .RelPermalink }}">
-            <figure>
-              <img src="{{ .RelPermalink }}" alt="{{ .Title }}" />
-            </figure>
-          </a>
-        {{ end }}
+        {{ $thumbnail := .Filter (slice images.AutoOrient (images.Process "fit 760x507")) }}
+        <a class="gallery-item" href="#" data-lightbox="{{ $index }}" data-src="{{ .RelPermalink }}">
+          <figure>
+            <img src="{{ $thumbnail.RelPermalink }}" alt="{{ .Title }}" />
+          </figure>
+        </a>
       {{ end }}
     </section>
 
