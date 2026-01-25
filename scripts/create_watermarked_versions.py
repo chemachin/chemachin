@@ -91,7 +91,7 @@ def main():
     success = 0
     for img_file in sorted(files):
         output_file = watermarked_dir / img_file.name
-        if add_watermark_logo(str(img_file), str(output_file), str(logo_path), opacity=0.55, size_percent=70):
+        if add_watermark_logo(str(img_file), str(output_file), str(logo_path), opacity=0.65, size_percent=40):
             print(f"✓ {img_file.name}")
             success += 1
     
