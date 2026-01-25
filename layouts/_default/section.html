@@ -184,10 +184,12 @@
       function showImage(index) {
         lightboxImg.src = images[index].getAttribute('data-src');
         lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
       }
 
       function closeLightbox() {
         lightbox.classList.remove('active');
+        document.body.style.overflow = '';
       }
 
       function nextImage() {

@@ -22,125 +22,60 @@
 
 
   
-  <link rel="stylesheet" href="/css/main.min.84165f359c8a8441d672ba59df38c111dbbf6713233d6a90a4fb3b8509a1c4d9.css" />
+  <link rel="stylesheet" href="/css/main.min.6031f18919a5919243f3aef7c58df672be3052a45dd4517b8fc728761fda4de4.css" />
   
   
   <script src="/js/main.3913aa6ea1a9d049a19a45e903ee6beb6dcbdf8bde53054a9249fdc03307bb98.js" defer></script></head>
 
   <body>
-    <header style="width: 100%; position: relative;">
-  <style>
-    nav {
-      display: flex !important;
-      justify-content: center !important;
-      align-items: center !important;
-      width: 100% !important;
-      padding: 0.5em 1em !important;
-      flex-wrap: wrap !important;
-      gap: 1em !important;
-      position: relative !important;
-    }
-
-    .top-menu {
-      display: flex !important;
-      justify-content: center !important;
-      align-items: center !important;
-      list-style: none !important;
-      padding: 0 !important;
-      margin: 0 !important;
-      gap: 1em !important;
-    }
-
-    .top-menu li {
-      margin: 0 !important;
-    }
-
-    .lang-switcher {
-      display: flex !important;
-      gap: 1em !important;
-      font-size: 1.5em !important;
-      position: absolute !important;
-      right: 1em !important;
-      top: 50% !important;
-      transform: translateY(-50%) !important;
-    }
-
-    @media (max-width: 768px) {
-      nav {
-        justify-content: center !important;
-        padding: 0.5em !important;
-      }
-
-      .top-menu {
-        flex-wrap: wrap !important;
-        gap: 0.5em !important;
-        justify-content: center !important;
-      }
-
-      .top-menu li {
-        margin: 0.25em 0.5em !important;
-      }
-
-      .top-menu a {
-        font-size: 0.9em !important;
-      }
-
-      .lang-switcher {
-        top: 0.5em !important;
-        right: 1em !important;
-        font-size: 1.2em !important;
-        gap: 0 !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        transform: none !important;
-      }
-    }
-  </style>
-  <nav style="position: relative !important;">
-    <ul class="top-menu">
-      
-        <li>
-          
-            <a href="https://chemachin.es/es/" style="text-decoration: none !important; font-weight: bold !important; opacity: 0.7 !important;">Inicio</a>
-          
-        </li>
-      
-        <li>
-          
-            <a href="https://chemachin.es/es/gallery/" style="text-decoration: none !important; font-weight: bold !important; opacity: 0.7 !important;">Galería</a>
-          
-        </li>
-      
-        <li>
-          
-            <a href="https://chemachin.es/es/about/" style="text-decoration: none !important; font-weight: 900 !important; color: var(--text-1); opacity: 1 !important;">Acerca de</a>
-          
-        </li>
-      
+    <header>
+  
+    <a class="btn btn-square" href="/es/" title="Inicio">
+      <svg width="24" height="24" data-slot="icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path clip-rule="evenodd" fill-rule="evenodd" d="M11.03 3.97a.75.75 0 0 1 0 1.06l-6.22 6.22H21a.75.75 0 0 1 0 1.5H4.81l6.22 6.22a.75.75 0 1 1-1.06 1.06l-7.5-7.5a.75.75 0 0 1 0-1.06l7.5-7.5a.75.75 0 0 1 1.06 0Z"></path>
+      </svg>
+    </a>
+  
+  
+    <ul>
+      <li>
+        <button class="btn btn-square" id="menu-toggle" aria-expanded="false" type="button" title="Menú">
+          <svg class="icon-menu" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path clip-rule="evenodd" fill-rule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z"></path>
+          </svg>
+          <svg class="icon-close hidden" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path clip-rule="evenodd" fill-rule="evenodd" d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z"></path>
+          </svg>
+        </button>
+      </li>
     </ul>
-    
-    
-    
-      
-    
-    <div class="lang-switcher">
-      
-        
-        
-          
-            
-          
-        
-          
-        
-        
-          <a href="/about/" style="text-decoration: none !important; opacity: 0.6 !important; transition: opacity 0.3s !important;">🇬🇧</a>
-        
-        <span style="opacity: 1 !important;">🇪🇸</span>
-      
-    </div>
-  </nav>
+  
 </header>
+
+  <menu class="hidden" id="menu">
+    
+      <li itemscope itemtype="http://www.schema.org/SiteNavigationElement">
+        <a aria-current="false" href="/es/" itemprop="url">
+          <span itemprop="name">Inicio</span>
+        </a>
+      </li>
+    
+      <li itemscope itemtype="http://www.schema.org/SiteNavigationElement">
+        <a aria-current="false" href="/es/gallery/" itemprop="url">
+          <span itemprop="name">Galería</span>
+        </a>
+      </li>
+    
+      <li itemscope itemtype="http://www.schema.org/SiteNavigationElement">
+        <a aria-current="false" href="/es/about/" itemprop="url">
+          <span itemprop="name">Acerca de</span>
+        </a>
+      </li>
+    
+  </menu>
+
+
+
     <main>
       
   
