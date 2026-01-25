@@ -161,8 +161,13 @@
     <section class="gallery-container">
       {{ range $index, $image := (.Resources.ByType "image") }}
         {{ $thumbnail := .Filter (slice images.AutoOrient (images.Process "fit 760x507")) }}
-        {{ $lightboxImg := .Filter (slice images.AutoOrient (images.Process "fit 1400x933") (images.Overlay $wm 0 0)) }}
-        <a class="gallery-item" href="#" data-lightbox="{{ $index }}" data-src="{{ $lightboxImg.RelPermalink }}">
+        {{/* Only apply watermark overlay to raster images (JPG/PNG), not SVG */}}
+        {{ if or (eq .MediaType.SubType "jpeg") (eq .MediaType.SubType "png") }}
+          {{ $lightboxImg := .Filter (slice images.AutoOrient (images.Process "fit 1400x933") (images.Overlay $wm 0 0)) }}
+          <a class="gallery-item" href="#" data-lightbox="{{ $index }}" data-src="{{ $lightboxImg.RelPermalink }}">
+        {{ else }}
+          <a class="gallery-item" href="#" data-lightbox="{{ $index }}" data-src="{{ .RelPermalink }}">
+        {{ end }}
           <figure>
             <img src="{{ $thumbnail.RelPermalink }}" alt="{{ .Title }}" />
           </figure>
