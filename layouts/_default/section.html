@@ -156,10 +156,13 @@
   </style>
   
   {{ if .Resources.ByType "image" }}
+    {{/* Watermark image fetched from site assets */}}
+    {{ $wm := resources.GetRemote "https://chemachin.es/images/Chemachineb.png" }}
     <section class="gallery-container">
       {{ range $index, $image := (.Resources.ByType "image") }}
         {{ $thumbnail := .Filter (slice images.AutoOrient (images.Process "fit 760x507")) }}
-        <a class="gallery-item" href="#" data-lightbox="{{ $index }}" data-src="{{ .RelPermalink }}">
+        {{ $lightboxImg := .Filter (slice images.AutoOrient (images.Process "fit 1600x1200") (images.Overlay $wm (dict "anchor" "center" "opacity" 35))) }}
+        <a class="gallery-item" href="#" data-lightbox="{{ $index }}" data-src="{{ $lightboxImg.RelPermalink }}" data-width="{{ $lightboxImg.Width }}" data-height="{{ $lightboxImg.Height }}">
           <figure>
             <img src="{{ $thumbnail.RelPermalink }}" alt="{{ .Title }}" />
           </figure>
