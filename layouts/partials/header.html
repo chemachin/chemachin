@@ -1,0 +1,120 @@
+<header style="width: 100%; position: relative;">
+  <style>
+    nav {
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      width: 100% !important;
+      padding: 0.5em 1em !important;
+      flex-wrap: wrap !important;
+      gap: 1em !important;
+      position: relative !important;
+    }
+
+    .top-menu {
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      list-style: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      gap: 1em !important;
+    }
+
+    .top-menu li {
+      margin: 0 !important;
+    }
+
+    .lang-switcher {
+      display: flex !important;
+      gap: 1em !important;
+      font-size: 1.5em !important;
+      position: absolute !important;
+      right: 1em !important;
+      top: 50% !important;
+      transform: translateY(-50%) !important;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        justify-content: center !important;
+        padding: 0.5em !important;
+      }
+
+      .top-menu {
+        flex-wrap: wrap !important;
+        gap: 0.5em !important;
+        justify-content: center !important;
+      }
+
+      .top-menu li {
+        margin: 0.25em 0.5em !important;
+      }
+
+      .top-menu a {
+        font-size: 0.9em !important;
+      }
+
+      .lang-switcher {
+        top: 0.5em !important;
+        right: 1em !important;
+        font-size: 1.2em !important;
+        gap: 0 !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        transform: none !important;
+      }
+    }
+  </style>
+  <nav style="position: relative !important;">
+    <ul class="top-menu">
+      {{ range .Site.Menus.main }}
+        <li>
+          {{ if or (eq $.Page.Permalink (.URL | absLangURL)) (hasSuffix $.Page.Permalink (.URL | absLangURL)) }}
+            <a href="{{ .URL | absLangURL }}" style="text-decoration: none !important; font-weight: 900 !important; color: var(--text-1); opacity: 1 !important;">{{ .Name }}</a>
+          {{ else }}
+            <a href="{{ .URL | absLangURL }}" style="text-decoration: none !important; font-weight: bold !important; opacity: 0.7 !important;">{{ .Name }}</a>
+          {{ end }}
+        </li>
+      {{ end }}
+    </ul>
+    {{/* Build language switch links: prefer actual translations, fallback to computed path */}}
+    {{ $path := .Page.RelPermalink | strings.TrimPrefix "/" | strings.TrimSuffix "/" }}
+    {{ if hasPrefix $path "es/" }}
+      {{ $path = $path | strings.TrimPrefix "es/" }}
+    {{ end }}
+    <div class="lang-switcher">
+      {{ if eq $.Site.Language.Lang "en" }}
+        <span style="opacity: 1 !important;">🇬🇧</span>
+        {{ $target := "" }}
+        {{ range .Page.AllTranslations }}
+          {{ if eq .Language.Lang "es" }}
+            {{ $target = .RelPermalink }}
+          {{ end }}
+        {{ end }}
+        {{ if $target }}
+          <a href="{{ $target }}" style="text-decoration: none !important; opacity: 0.6 !important; transition: opacity 0.3s !important;">🇪🇸</a>
+        {{ else if eq $path "" }}
+          <a href="/es/" style="text-decoration: none !important; opacity: 0.6 !important; transition: opacity 0.3s !important;">🇪🇸</a>
+        {{ else }}
+          <a href="/es/{{ $path }}/" style="text-decoration: none !important; opacity: 0.6 !important; transition: opacity 0.3s !important;">🇪🇸</a>
+        {{ end }}
+      {{ else }}
+        {{ $target := "" }}
+        {{ range .Page.AllTranslations }}
+          {{ if eq .Language.Lang "en" }}
+            {{ $target = .RelPermalink }}
+          {{ end }}
+        {{ end }}
+        {{ if $target }}
+          <a href="{{ $target }}" style="text-decoration: none !important; opacity: 0.6 !important; transition: opacity 0.3s !important;">🇬🇧</a>
+        {{ else if eq $path "" }}
+          <a href="/" style="text-decoration: none !important; opacity: 0.6 !important; transition: opacity 0.3s !important;">🇬🇧</a>
+        {{ else }}
+          <a href="/{{ $path }}/" style="text-decoration: none !important; opacity: 0.6 !important; transition: opacity 0.3s !important;">🇬🇧</a>
+        {{ end }}
+        <span style="opacity: 1 !important;">🇪🇸</span>
+      {{ end }}
+    </div>
+  </nav>
+</header>
