@@ -68,7 +68,6 @@ def main():
     script_dir = Path(__file__).parent
     project_dir = script_dir.parent
     originals_dir = project_dir / 'private-originals'  # Private originals (not in repo)
-    gallery_dir = project_dir / 'content' / 'gallery'   # Hugo uses these (watermarked)
     watermarked_dir = project_dir / 'static' / 'gallery-watermarked'
     logo_path = project_dir / 'themes' / 'gallery' / 'static' / 'images' / 'Chemachineb.png'
     
@@ -84,7 +83,6 @@ def main():
     
     # Create folders
     watermarked_dir.mkdir(parents=True, exist_ok=True)
-    gallery_dir.mkdir(parents=True, exist_ok=True)
     
     # Process images
     image_extensions = {'.jpg', '.jpeg', '.png', '.gif', '.webp'}
@@ -92,29 +90,22 @@ def main():
     
     print(f"Creating logo watermarked versions...")
     print(f"Logo: {logo_path.name}")
-    print(f"Originals (private): private-originals/")
-    print(f"Output for Hugo: content/gallery/")
-    print(f"Output for lightbox: static/gallery-watermarked/\n")
+    print(f"Source: private-originals/")
+    print(f"Output: static/gallery-watermarked/\n")
     
     success = 0
     for img_file in sorted(files):
-        # Create watermarked version for lightbox
+        # Create watermarked version for lightbox only
         watermarked_file = watermarked_dir / img_file.name
-        # Create watermarked version for Hugo processing
-        gallery_file = gallery_dir / img_file.name
         
-        if add_watermark_logo(str(img_file), str(watermarked_file), str(logo_path), opacity=0.65, size_percent=40):
-            # Copy to gallery folder too
-            watermarked_file_obj = Path(watermarked_file)
-            if watermarked_file_obj.exists():
-                import shutil
-                shutil.copy2(str(watermarked_file), str(gallery_file))
+        if add_watermark_logo(str(img_file), str(watermarked_file), str(logo_path), opacity=0.70, size_percent=40):
             print(f"✓ {img_file.name}")
             success += 1
     
     print(f"\n✓ {success}/{len(files)} watermarked versions created")
-    print(f"\nNOTE: Original images are kept private in private-originals/")
-    print(f"      Only watermarked versions are published online.")
+    print(f"\nNOTE: Original images in content/gallery/ are used for clean thumbnails")
+    print(f"      Watermarked versions in static/gallery-watermarked/ are for lightbox")
+    print(f"      Full-size originals never leave your local machine")
 
 if __name__ == '__main__':
     main()
