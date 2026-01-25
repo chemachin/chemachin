@@ -98,7 +98,7 @@ def main():
         # Create watermarked version for lightbox only
         watermarked_file = watermarked_dir / img_file.name
         
-        if add_watermark_logo(str(img_file), str(watermarked_file), str(logo_path), opacity=0.70, size_percent=40):
+        if add_watermark_logo(str(img_file), str(watermarked_file), str(logo_path), opacity=0.75, size_percent=65):
             print(f"✓ {img_file.name}")
             success += 1
     
