@@ -161,7 +161,7 @@
     <section class="gallery-container">
       {{ range $index, $image := (.Resources.ByType "image") }}
         {{ $thumbnail := .Filter (slice images.AutoOrient (images.Process "fit 760x507")) }}
-        {{ $lightboxImg := .Filter (slice images.AutoOrient (images.Process "fit 1600x1200") (images.Overlay $wm (dict "anchor" "center" "opacity" 35))) }}
+        {{ $lightboxImg := .Filter (slice images.AutoOrient (images.Process "fit 1600x1200") (images.Overlay $wm 0 0)) }}
         <a class="gallery-item" href="#" data-lightbox="{{ $index }}" data-src="{{ $lightboxImg.RelPermalink }}" data-width="{{ $lightboxImg.Width }}" data-height="{{ $lightboxImg.Height }}">
           <figure>
             <img src="{{ $thumbnail.RelPermalink }}" alt="{{ .Title }}" />
