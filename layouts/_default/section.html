@@ -82,6 +82,17 @@
       justify-content: center;
     }
 
+    /* Watermark overlay only in the lightbox */
+    .lightbox-content::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('/images/Chemachineb.png') center/35% no-repeat;
+      opacity: 0.12;
+      pointer-events: none;
+      mix-blend-mode: multiply;
+    }
+
     .lightbox-content img {
       max-width: 100%;
       max-height: 100%;
