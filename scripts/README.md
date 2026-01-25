@@ -3,7 +3,19 @@
 ## Watermark
 
 ### Description
-Script to add logo watermark to gallery images. Creates watermarked versions for lightbox/downloads while keeping original thumbnails clean.
+Script to add logo watermark to gallery images. **Keeps original full-size images private** (not published online or in repo). Only watermarked versions are published.
+
+### Security Model
+
+**Private (Not Published):**
+- `private-originals/` - Full-size original images without watermark
+- This folder is in `.gitignore` - never committed to repo
+- Your original photos remain secure
+
+**Published (Public):**
+- `content/gallery/` - Watermarked versions for Hugo to process (creates thumbnails)
+- `static/gallery-watermarked/` - Watermarked versions for lightbox downloads
+- `docs/` - Generated site with only watermarked images
 
 ### Usage
 
@@ -14,10 +26,13 @@ python scripts/create_watermarked_versions.py
 
 ### How It Works
 
-- Original images in `content/gallery/` remain clean (used for thumbnails)
-- Watermarked versions are created in `static/gallery-watermarked/`
-- The lightbox displays watermarked versions
-- When users download, they get the watermarked version
+1. Place original images in `private-originals/` (not in repo)
+2. Script reads from `private-originals/`
+3. Creates watermarked versions in both:
+   - `content/gallery/` (Hugo processes these for thumbnails)
+   - `static/gallery-watermarked/` (served in lightbox)
+4. Hugo generates site with only watermarked images
+5. Original images never leave your local machine
 
 ### Current Settings
 
@@ -55,24 +70,26 @@ JPG, JPEG, PNG, GIF, WebP
 ### Recommended Workflow
 
 ```bash
-# 1. Add new images to content/gallery/
+# 1. Add new original images to private-originals/ (not tracked by git)
 # 2. Process with watermark
 python scripts/create_watermarked_versions.py
 
 # 3. Regenerate site
 hugo
 
-# 4. Check changes
+# 4. Check changes (only watermarked versions)
 git status
 
-# 5. Commit
+# 5. Commit (originals stay private)
 git add content/gallery static/gallery-watermarked docs/
-git commit -m "Add new gallery images with watermark"
+git commit -m "Add new gallery images (watermarked)"
 git push
 ```
 
 ### Notes
 
-- Script does NOT modify original images
+- **Originals are NEVER committed to repo** (protected by .gitignore)
+- **Originals are NEVER published online** (Hugo only processes watermarked versions)
 - Watermark is embedded in the image file (persists on download)
 - Hugo automatically copies static files to docs/ during build
+- Thumbnails and lightbox images are both watermarked

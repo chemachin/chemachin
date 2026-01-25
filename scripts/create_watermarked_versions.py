@@ -67,7 +67,8 @@ def main():
     # Paths
     script_dir = Path(__file__).parent
     project_dir = script_dir.parent
-    gallery_dir = project_dir / 'content' / 'gallery'
+    originals_dir = project_dir / 'private-originals'  # Private originals (not in repo)
+    gallery_dir = project_dir / 'content' / 'gallery'   # Hugo uses these (watermarked)
     watermarked_dir = project_dir / 'static' / 'gallery-watermarked'
     logo_path = project_dir / 'themes' / 'gallery' / 'static' / 'images' / 'Chemachineb.png'
     
@@ -76,26 +77,44 @@ def main():
         print(f"✗ Logo not found: {logo_path}")
         return
     
-    # Create folder for watermarked versions
+    # Check if originals exist
+    if not originals_dir.exists():
+        print(f"✗ Originals folder not found: {originals_dir}")
+        return
+    
+    # Create folders
     watermarked_dir.mkdir(parents=True, exist_ok=True)
+    gallery_dir.mkdir(parents=True, exist_ok=True)
     
     # Process images
     image_extensions = {'.jpg', '.jpeg', '.png', '.gif', '.webp'}
-    files = [f for f in gallery_dir.glob('*') if f.suffix.lower() in image_extensions]
+    files = [f for f in originals_dir.glob('*') if f.suffix.lower() in image_extensions]
     
-    print(f"Creating logo watermarked versions for lightbox...")
+    print(f"Creating logo watermarked versions...")
     print(f"Logo: {logo_path.name}")
-    print(f"Originals (clean): content/gallery/")
-    print(f"Watermarked: static/gallery-watermarked/\n")
+    print(f"Originals (private): private-originals/")
+    print(f"Output for Hugo: content/gallery/")
+    print(f"Output for lightbox: static/gallery-watermarked/\n")
     
     success = 0
     for img_file in sorted(files):
-        output_file = watermarked_dir / img_file.name
-        if add_watermark_logo(str(img_file), str(output_file), str(logo_path), opacity=0.65, size_percent=40):
+        # Create watermarked version for lightbox
+        watermarked_file = watermarked_dir / img_file.name
+        # Create watermarked version for Hugo processing
+        gallery_file = gallery_dir / img_file.name
+        
+        if add_watermark_logo(str(img_file), str(watermarked_file), str(logo_path), opacity=0.65, size_percent=40):
+            # Copy to gallery folder too
+            watermarked_file_obj = Path(watermarked_file)
+            if watermarked_file_obj.exists():
+                import shutil
+                shutil.copy2(str(watermarked_file), str(gallery_file))
             print(f"✓ {img_file.name}")
             success += 1
     
-    print(f"\n✓ {success}/{len(files)} logo versions created")
+    print(f"\n✓ {success}/{len(files)} watermarked versions created")
+    print(f"\nNOTE: Original images are kept private in private-originals/")
+    print(f"      Only watermarked versions are published online.")
 
 if __name__ == '__main__':
     main()
