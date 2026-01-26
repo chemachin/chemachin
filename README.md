@@ -19,16 +19,15 @@ chemachin/
 └── hugo.toml          # Hugo configuration
 ```
 
-## Tecnología utilizada
+## Deployment
 
+The site is deployed to GitHub Pages (https://chemachin.es) via commits to `main` branch. The `docs/` folder contains the published site.
+
+**Technology Stack:**
 - **Hugo v0.150.0-extended**: Static site generator with SCSS processing
 - **Git**: Version control and deployment
 - **[Hugo Gallery Theme](https://github.com/nicokaiser/hugo-theme-gallery/)**: Base theme (git submodule)
 - **Custom overrides**: Bilingual support, photo persistence via localStorage, responsive gallery layout
-
-## Deployment
-
-The site is deployed to GitHub Pages (https://chemachin.es) via commits to `main` branch. The `docs/` folder contains the published site.
 
 ## License
 
