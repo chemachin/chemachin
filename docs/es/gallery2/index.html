@@ -213,41 +213,7 @@
     }
 
      
-    .nav-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0, 0, 0, 0.6);
-      color: white;
-      border: none;
-      font-size: 2rem;
-      padding: 1rem 1.5rem;
-      cursor: pointer;
-      border-radius: 0.5rem;
-      transition: background 0.3s;
-      z-index: 10;
-    }
-
-    .nav-arrow:hover {
-      background: rgba(0, 0, 0, 0.9);
-    }
-
-    .nav-arrow.prev {
-      left: -80px;
-    }
-
-    .nav-arrow.next {
-      right: -80px;
-    }
-
-    @media (max-width: 1024px) {
-      .nav-arrow.prev {
-        left: 10px;
-      }
-      .nav-arrow.next {
-        right: 10px;
-      }
-    }
+    .nav-arrow { display: none; }
 
      
     .thumbnails-container {
