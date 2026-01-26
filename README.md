@@ -19,41 +19,12 @@ chemachin/
 └── hugo.toml          # Hugo configuration
 ```
 
-## Prerequisites
+## Tecnología utilizada
 
-- Hugo v0.150.0-extended (required for SCSS processing)
-- Git
-
-The site uses the [Hugo Gallery Theme](https://github.com/nicokaiser/hugo-theme-gallery/) (included as git submodule) with custom overrides for bilingual support, photo persistence via localStorage, and responsive gallery layout.
-
-## Setup
-
-```bash
-# Clone repository
-git clone https://github.com/chemachin/chemachin.git
-cd chemachin
-
-# Initialize submodule
-git submodule update --init --recursive
-
-# Add your images to content/gallery/
-# (1-8.jpg recommended)
-```
-
-## Building
-
-```bash
-# Development server
-hugo server
-
-# Build static site
-hugo
-
-# Publishing (auto via GitHub Actions to docs/)
-git add .
-git commit -m "your message"
-git push origin main
-```
+- **Hugo v0.150.0-extended**: Static site generator with SCSS processing
+- **Git**: Version control and deployment
+- **[Hugo Gallery Theme](https://github.com/nicokaiser/hugo-theme-gallery/)**: Base theme (git submodule)
+- **Custom overrides**: Bilingual support, photo persistence via localStorage, responsive gallery layout
 
 ## Deployment
 
