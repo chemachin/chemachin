@@ -1,0 +1,333 @@
+{{ define "main" }}
+  {{ partial "title.html" . }}
+  
+  <style>
+    /* Main gallery viewer */
+    .gallery2-viewer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      padding: 2rem 1.5rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Main image container */
+    .main-image-container {
+      position: relative;
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .main-image-wrapper {
+      position: relative;
+      width: 100%;
+      cursor: zoom-in;
+    }
+
+    .main-image-wrapper img {
+      width: 100%;
+      height: auto;
+      max-height: 70vh;
+      object-fit: contain;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Navigation arrows */
+    .nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      border: none;
+      font-size: 2rem;
+      padding: 1rem 1.5rem;
+      cursor: pointer;
+      border-radius: 0.5rem;
+      transition: background 0.3s;
+      z-index: 10;
+    }
+
+    .nav-arrow:hover {
+      background: rgba(0, 0, 0, 0.9);
+    }
+
+    .nav-arrow.prev {
+      left: -80px;
+    }
+
+    .nav-arrow.next {
+      right: -80px;
+    }
+
+    @media (max-width: 1024px) {
+      .nav-arrow.prev {
+        left: 10px;
+      }
+      .nav-arrow.next {
+        right: 10px;
+      }
+    }
+
+    /* Thumbnails */
+    .thumbnails-container {
+      width: 100%;
+      max-width: 1200px;
+      overflow-x: auto;
+      padding: 1rem 0;
+    }
+
+    .thumbnails {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      min-width: min-content;
+    }
+
+    .thumbnail {
+      flex-shrink: 0;
+      width: 120px;
+      height: 80px;
+      cursor: pointer;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      border: 3px solid transparent;
+      transition: all 0.3s;
+      opacity: 0.6;
+    }
+
+    .thumbnail:hover {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
+    .thumbnail.active {
+      border-color: white;
+      opacity: 1;
+    }
+
+    .thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Lightbox styles */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.95);
+      animation: fadeIn 0.3s;
+    }
+
+    .lightbox.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+      animation: zoomIn 0.3s;
+    }
+
+    .lightbox-content img {
+      max-width: 100%;
+      max-height: 90vh;
+      height: auto;
+      width: auto;
+      border-radius: 0.5rem;
+      object-fit: contain;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      color: white;
+      font-size: 2.5rem;
+      cursor: pointer;
+      z-index: 1001;
+      background: rgba(0, 0, 0, 0.5);
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    .lightbox-close:hover {
+      background: rgba(0, 0, 0, 0.8);
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 15px 20px;
+      border-radius: 5px;
+      z-index: 1001;
+    }
+
+    .lightbox-prev {
+      left: 20px;
+    }
+
+    .lightbox-next {
+      right: 20px;
+    }
+
+    .lightbox-nav:hover {
+      background: rgba(0, 0, 0, 0.8);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.8); }
+      to { transform: scale(1); }
+    }
+  </style>
+  
+  {{ if .Resources.ByType "image" }}
+    <div class="gallery2-viewer">
+      <!-- Main image display -->
+      <div class="main-image-container">
+        <button class="nav-arrow prev" onclick="changeImage(-1)">&#10094;</button>
+        <div class="main-image-wrapper" onclick="openLightbox()">
+          <img id="main-image" src="" alt="" />
+        </div>
+        <button class="nav-arrow next" onclick="changeImage(1)">&#10095;</button>
+      </div>
+
+      <!-- Thumbnails -->
+      <div class="thumbnails-container">
+        <div class="thumbnails" id="thumbnails">
+          {{ range $index, $image := (.Resources.ByType "image") }}
+            {{ $thumbnail := .Filter (slice images.AutoOrient (images.Process "fit 760x507")) }}
+            {{ $watermarkedPath := printf "/gallery-watermarked/%s" .Name }}
+            <div class="thumbnail" data-index="{{ $index }}" data-src="{{ $thumbnail.RelPermalink }}" data-watermarked="{{ $watermarkedPath }}" onclick="selectImage({{ $index }})">
+              <img src="{{ $thumbnail.RelPermalink }}" alt="{{ .Title }}" />
+            </div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+      <div class="lightbox-content">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <span class="lightbox-nav lightbox-prev" onclick="prevImageLightbox()">&#10094;</span>
+        <img id="lightbox-img" src="" alt="">
+        <span class="lightbox-nav lightbox-next" onclick="nextImageLightbox()">&#10095;</span>
+      </div>
+    </div>
+
+    <script>
+      let currentIndex = 0;
+      const thumbnails = document.querySelectorAll('.thumbnail');
+      const mainImage = document.getElementById('main-image');
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+
+      // Initialize with first image
+      function init() {
+        if (thumbnails.length > 0) {
+          selectImage(0);
+        }
+      }
+
+      function selectImage(index) {
+        currentIndex = index;
+        const thumbnail = thumbnails[index];
+        
+        // Update main image
+        mainImage.src = thumbnail.getAttribute('data-src');
+        
+        // Update active thumbnail
+        thumbnails.forEach(t => t.classList.remove('active'));
+        thumbnail.classList.add('active');
+        
+        // Scroll thumbnail into view
+        thumbnail.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+
+      function changeImage(direction) {
+        currentIndex = (currentIndex + direction + thumbnails.length) % thumbnails.length;
+        selectImage(currentIndex);
+      }
+
+      function openLightbox() {
+        const thumbnail = thumbnails[currentIndex];
+        lightboxImg.src = thumbnail.getAttribute('data-watermarked');
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      function nextImageLightbox() {
+        changeImage(1);
+        const thumbnail = thumbnails[currentIndex];
+        lightboxImg.src = thumbnail.getAttribute('data-watermarked');
+      }
+
+      function prevImageLightbox() {
+        changeImage(-1);
+        const thumbnail = thumbnails[currentIndex];
+        lightboxImg.src = thumbnail.getAttribute('data-watermarked');
+      }
+
+      // Close on background click
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (lightbox.classList.contains('active')) {
+          if (e.key === 'ArrowRight') nextImageLightbox();
+          if (e.key === 'ArrowLeft') prevImageLightbox();
+          if (e.key === 'Escape') closeLightbox();
+        } else {
+          if (e.key === 'ArrowRight') changeImage(1);
+          if (e.key === 'ArrowLeft') changeImage(-1);
+        }
+      });
+
+      // Initialize on load
+      init();
+    </script>
+  {{ end }}
+  
+  {{ with .Content }}
+    <section class="prose">
+      {{ . }}
+    </section>
+  {{ end }}
+{{ end }}

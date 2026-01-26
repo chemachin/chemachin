@@ -174,55 +174,120 @@
 
   
   <style>
-    .gallery-container {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
+     
+    .gallery2-viewer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       gap: 2rem;
-      padding: 2rem;
-      max-width: 1600px;
+      padding: 2rem 1.5rem;
+      max-width: 1400px;
       margin: 0 auto;
     }
 
-    @media (max-width: 768px) {
-      .gallery-container {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-        padding: 1rem;
+     
+    .main-image-container {
+      position: relative;
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .main-image-wrapper {
+      position: relative;
+      width: 100%;
+      cursor: zoom-in;
+    }
+
+    .main-image-wrapper img {
+      width: 100%;
+      height: auto;
+      max-height: 70vh;
+      object-fit: contain;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+     
+    .nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      border: none;
+      font-size: 2rem;
+      padding: 1rem 1.5rem;
+      cursor: pointer;
+      border-radius: 0.5rem;
+      transition: background 0.3s;
+      z-index: 10;
+    }
+
+    .nav-arrow:hover {
+      background: rgba(0, 0, 0, 0.9);
+    }
+
+    .nav-arrow.prev {
+      left: -80px;
+    }
+
+    .nav-arrow.next {
+      right: -80px;
+    }
+
+    @media (max-width: 1024px) {
+      .nav-arrow.prev {
+        left: 10px;
+      }
+      .nav-arrow.next {
+        right: 10px;
       }
     }
 
-    .gallery-item {
-      display: flex;
-      flex-direction: column;
-      cursor: pointer;
-      border-radius: 1.2rem;
-      overflow: hidden;
-      transition: all 0.3s ease;
-      text-decoration: none;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .gallery-item:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
-    }
-
-    .gallery-item figure {
-      margin: 0;
+     
+    .thumbnails-container {
       width: 100%;
-      aspect-ratio: 3/2;
+      max-width: 1200px;
+      overflow-x: auto;
+      padding: 1rem 0;
     }
 
-    .gallery-item img {
+    .thumbnails {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      min-width: min-content;
+    }
+
+    .thumbnail {
+      flex-shrink: 0;
+      width: 120px;
+      height: 80px;
+      cursor: pointer;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      border: 3px solid transparent;
+      transition: all 0.3s;
+      opacity: 0.6;
+    }
+
+    .thumbnail:hover {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
+    .thumbnail.active {
+      border-color: white;
+      opacity: 1;
+    }
+
+    .thumbnail img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
-      transition: transform 0.3s ease;
-    }
-
-    .gallery-item:hover img {
-      transform: scale(1.05);
     }
 
      
@@ -234,7 +299,7 @@
       top: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.9);
+      background-color: rgba(0, 0, 0, 0.95);
       animation: fadeIn 0.3s;
     }
 
@@ -246,23 +311,18 @@
 
     .lightbox-content {
       position: relative;
-      max-width: 85vw;
-      max-height: 85vh;
+      max-width: 90vw;
+      max-height: 90vh;
       animation: zoomIn 0.3s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
     .lightbox-content img {
       max-width: 100%;
-      max-height: 100%;
+      max-height: 90vh;
       height: auto;
       width: auto;
       border-radius: 0.5rem;
-      object-fit: scale-down;
-      position: relative;
-      z-index: 1001;
+      object-fit: contain;
     }
 
     .lightbox-close {
@@ -270,13 +330,20 @@
       top: -40px;
       right: 0;
       color: white;
-      font-size: 2rem;
+      font-size: 2.5rem;
       cursor: pointer;
       z-index: 1001;
+      background: rgba(0, 0, 0, 0.5);
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
     }
 
     .lightbox-close:hover {
-      color: #ccc;
+      background: rgba(0, 0, 0, 0.8);
     }
 
     .lightbox-nav {
@@ -287,7 +354,7 @@
       font-size: 2rem;
       cursor: pointer;
       background: rgba(0, 0, 0, 0.5);
-      padding: 10px 15px;
+      padding: 15px 20px;
       border-radius: 5px;
       z-index: 1001;
     }
@@ -316,108 +383,119 @@
   </style>
   
   
-    <section class="gallery-container">
+    <div class="gallery2-viewer">
       
-        
-        
-        
-        <a class="gallery-item" href="#" data-lightbox="0" data-src="/gallery-watermarked/1.jpg">
-          <figure>
-            <img src="/gallery2/1_hu_89922805cc41afb7.jpg" alt="Photo 1" />
-          </figure>
-        </a>
+      <div class="main-image-container">
+        <button class="nav-arrow prev" onclick="changeImage(-1)">&#10094;</button>
+        <div class="main-image-wrapper" onclick="openLightbox()">
+          <img id="main-image" src="" alt="" />
+        </div>
+        <button class="nav-arrow next" onclick="changeImage(1)">&#10095;</button>
+      </div>
+
       
-        
-        
-        
-        <a class="gallery-item" href="#" data-lightbox="1" data-src="/gallery-watermarked/2.jpg">
-          <figure>
-            <img src="/gallery2/2_hu_295d07c726c2fc62.jpg" alt="Photo 2" />
-          </figure>
-        </a>
-      
-        
-        
-        
-        <a class="gallery-item" href="#" data-lightbox="2" data-src="/gallery-watermarked/3.jpg">
-          <figure>
-            <img src="/gallery2/3_hu_72c8bcc938c77ab5.jpg" alt="Photo 3" />
-          </figure>
-        </a>
-      
-        
-        
-        
-        <a class="gallery-item" href="#" data-lightbox="3" data-src="/gallery-watermarked/4.jpg">
-          <figure>
-            <img src="/gallery2/4_hu_60c74b6439693c48.jpg" alt="Photo 4" />
-          </figure>
-        </a>
-      
-        
-        
-        
-        <a class="gallery-item" href="#" data-lightbox="4" data-src="/gallery-watermarked/5.jpg">
-          <figure>
-            <img src="/gallery2/5_hu_add6a2b412472f23.jpg" alt="Photo 5" />
-          </figure>
-        </a>
-      
-        
-        
-        
-        <a class="gallery-item" href="#" data-lightbox="5" data-src="/gallery-watermarked/6.jpg">
-          <figure>
-            <img src="/gallery2/6_hu_cfc1c957b6cb0312.jpg" alt="Photo 6" />
-          </figure>
-        </a>
-      
-        
-        
-        
-        <a class="gallery-item" href="#" data-lightbox="6" data-src="/gallery-watermarked/7.jpg">
-          <figure>
-            <img src="/gallery2/7_hu_f5e23f7fcf98cca4.jpg" alt="Photo 7" />
-          </figure>
-        </a>
-      
-        
-        
-        
-        <a class="gallery-item" href="#" data-lightbox="7" data-src="/gallery-watermarked/8.jpg">
-          <figure>
-            <img src="/gallery2/8_hu_c3a9d94e49f5415f.jpg" alt="Photo 8" />
-          </figure>
-        </a>
-      
-    </section>
+      <div class="thumbnails-container">
+        <div class="thumbnails" id="thumbnails">
+          
+            
+            
+            <div class="thumbnail" data-index="0" data-src="/gallery2/1_hu_89922805cc41afb7.jpg" data-watermarked="/gallery-watermarked/1.jpg" onclick="selectImage( 0 )">
+              <img src="/gallery2/1_hu_89922805cc41afb7.jpg" alt="Photo 1" />
+            </div>
+          
+            
+            
+            <div class="thumbnail" data-index="1" data-src="/gallery2/2_hu_295d07c726c2fc62.jpg" data-watermarked="/gallery-watermarked/2.jpg" onclick="selectImage( 1 )">
+              <img src="/gallery2/2_hu_295d07c726c2fc62.jpg" alt="Photo 2" />
+            </div>
+          
+            
+            
+            <div class="thumbnail" data-index="2" data-src="/gallery2/3_hu_72c8bcc938c77ab5.jpg" data-watermarked="/gallery-watermarked/3.jpg" onclick="selectImage( 2 )">
+              <img src="/gallery2/3_hu_72c8bcc938c77ab5.jpg" alt="Photo 3" />
+            </div>
+          
+            
+            
+            <div class="thumbnail" data-index="3" data-src="/gallery2/4_hu_60c74b6439693c48.jpg" data-watermarked="/gallery-watermarked/4.jpg" onclick="selectImage( 3 )">
+              <img src="/gallery2/4_hu_60c74b6439693c48.jpg" alt="Photo 4" />
+            </div>
+          
+            
+            
+            <div class="thumbnail" data-index="4" data-src="/gallery2/5_hu_add6a2b412472f23.jpg" data-watermarked="/gallery-watermarked/5.jpg" onclick="selectImage( 4 )">
+              <img src="/gallery2/5_hu_add6a2b412472f23.jpg" alt="Photo 5" />
+            </div>
+          
+            
+            
+            <div class="thumbnail" data-index="5" data-src="/gallery2/6_hu_cfc1c957b6cb0312.jpg" data-watermarked="/gallery-watermarked/6.jpg" onclick="selectImage( 5 )">
+              <img src="/gallery2/6_hu_cfc1c957b6cb0312.jpg" alt="Photo 6" />
+            </div>
+          
+            
+            
+            <div class="thumbnail" data-index="6" data-src="/gallery2/7_hu_f5e23f7fcf98cca4.jpg" data-watermarked="/gallery-watermarked/7.jpg" onclick="selectImage( 6 )">
+              <img src="/gallery2/7_hu_f5e23f7fcf98cca4.jpg" alt="Photo 7" />
+            </div>
+          
+            
+            
+            <div class="thumbnail" data-index="7" data-src="/gallery2/8_hu_c3a9d94e49f5415f.jpg" data-watermarked="/gallery-watermarked/8.jpg" onclick="selectImage( 7 )">
+              <img src="/gallery2/8_hu_c3a9d94e49f5415f.jpg" alt="Photo 8" />
+            </div>
+          
+        </div>
+      </div>
+    </div>
 
     
     <div id="lightbox" class="lightbox">
       <div class="lightbox-content">
         <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-        <span class="lightbox-nav lightbox-prev" onclick="prevImage()">&#10094;</span>
+        <span class="lightbox-nav lightbox-prev" onclick="prevImageLightbox()">&#10094;</span>
         <img id="lightbox-img" src="" alt="">
-        <span class="lightbox-nav lightbox-next" onclick="nextImage()">&#10095;</span>
+        <span class="lightbox-nav lightbox-next" onclick="nextImageLightbox()">&#10095;</span>
       </div>
     </div>
 
     <script>
       let currentIndex = 0;
-      const images = document.querySelectorAll('.gallery-item');
+      const thumbnails = document.querySelectorAll('.thumbnail');
+      const mainImage = document.getElementById('main-image');
       const lightbox = document.getElementById('lightbox');
       const lightboxImg = document.getElementById('lightbox-img');
 
-      images.forEach((img, index) => {
-        img.addEventListener('click', (e) => {
-          e.preventDefault();
-          currentIndex = index;
-          showImage(index);
-        });
-      });
+      
+      function init() {
+        if (thumbnails.length > 0) {
+          selectImage(0);
+        }
+      }
 
-      function showImage(index) {
-        lightboxImg.src = images[index].getAttribute('data-src');
+      function selectImage(index) {
+        currentIndex = index;
+        const thumbnail = thumbnails[index];
+        
+        
+        mainImage.src = thumbnail.getAttribute('data-src');
+        
+        
+        thumbnails.forEach(t => t.classList.remove('active'));
+        thumbnail.classList.add('active');
+        
+        
+        thumbnail.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+
+      function changeImage(direction) {
+        currentIndex = (currentIndex + direction + thumbnails.length) % thumbnails.length;
+        selectImage(currentIndex);
+      }
+
+      function openLightbox() {
+        const thumbnail = thumbnails[currentIndex];
+        lightboxImg.src = thumbnail.getAttribute('data-watermarked');
         lightbox.classList.add('active');
         document.body.style.overflow = 'hidden';
       }
@@ -427,14 +505,16 @@
         document.body.style.overflow = '';
       }
 
-      function nextImage() {
-        currentIndex = (currentIndex + 1) % images.length;
-        showImage(currentIndex);
+      function nextImageLightbox() {
+        changeImage(1);
+        const thumbnail = thumbnails[currentIndex];
+        lightboxImg.src = thumbnail.getAttribute('data-watermarked');
       }
 
-      function prevImage() {
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
-        showImage(currentIndex);
+      function prevImageLightbox() {
+        changeImage(-1);
+        const thumbnail = thumbnails[currentIndex];
+        lightboxImg.src = thumbnail.getAttribute('data-watermarked');
       }
 
       
@@ -445,11 +525,17 @@
       
       document.addEventListener('keydown', (e) => {
         if (lightbox.classList.contains('active')) {
-          if (e.key === 'ArrowRight') nextImage();
-          if (e.key === 'ArrowLeft') prevImage();
+          if (e.key === 'ArrowRight') nextImageLightbox();
+          if (e.key === 'ArrowLeft') prevImageLightbox();
           if (e.key === 'Escape') closeLightbox();
+        } else {
+          if (e.key === 'ArrowRight') changeImage(1);
+          if (e.key === 'ArrowLeft') changeImage(-1);
         }
       });
+
+      
+      init();
     </script>
   
   
