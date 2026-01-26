@@ -119,19 +119,45 @@
   </nav>
 </header>
 <script>
-  // Propagate current photo param to language links so gallery keeps selection
+  // Propagate current photo param to language links and enforce it on click
   (function() {
     const params = new URLSearchParams(window.location.search);
-    const photo = params.get('photo');
-    if (!photo) return;
-    document.querySelectorAll('.lang-switcher a').forEach(link => {
-      try {
-        const url = new URL(link.href, window.location.origin);
-        url.searchParams.set('photo', photo);
-        link.href = url.toString();
-      } catch (e) {
-        /* ignore malformed links */
+    const initialPhoto = params.get('photo');
+    const langLinks = document.querySelectorAll('.lang-switcher a');
+
+    function photoValue() {
+      if (typeof window.currentPhotoIndex === 'number') {
+        return window.currentPhotoIndex + 1;
       }
+      const p = new URLSearchParams(window.location.search).get('photo');
+      return p;
+    }
+
+    // Set hrefs on load (in case we navigate without clicking)
+    if (initialPhoto) {
+      langLinks.forEach(link => {
+        try {
+          const url = new URL(link.href, window.location.origin);
+          url.searchParams.set('photo', initialPhoto);
+          link.href = url.toString();
+        } catch (e) { /* ignore */ }
+      });
+    }
+
+    // Intercept clicks to force current photo param
+    langLinks.forEach(link => {
+      link.addEventListener('click', (evt) => {
+        const current = photoValue();
+        if (!current) return; // fallback to default behavior
+        evt.preventDefault();
+        try {
+          const url = new URL(link.href, window.location.origin);
+          url.searchParams.set('photo', current);
+          window.location.href = url.toString();
+        } catch (e) {
+          window.location.href = link.href;
+        }
+      });
     });
   })();
 </script>

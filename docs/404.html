@@ -142,16 +142,42 @@
   
   (function() {
     const params = new URLSearchParams(window.location.search);
-    const photo = params.get('photo');
-    if (!photo) return;
-    document.querySelectorAll('.lang-switcher a').forEach(link => {
-      try {
-        const url = new URL(link.href, window.location.origin);
-        url.searchParams.set('photo', photo);
-        link.href = url.toString();
-      } catch (e) {
-         
+    const initialPhoto = params.get('photo');
+    const langLinks = document.querySelectorAll('.lang-switcher a');
+
+    function photoValue() {
+      if (typeof window.currentPhotoIndex === 'number') {
+        return window.currentPhotoIndex + 1;
       }
+      const p = new URLSearchParams(window.location.search).get('photo');
+      return p;
+    }
+
+    
+    if (initialPhoto) {
+      langLinks.forEach(link => {
+        try {
+          const url = new URL(link.href, window.location.origin);
+          url.searchParams.set('photo', initialPhoto);
+          link.href = url.toString();
+        } catch (e) {   }
+      });
+    }
+
+    
+    langLinks.forEach(link => {
+      link.addEventListener('click', (evt) => {
+        const current = photoValue();
+        if (!current) return; 
+        evt.preventDefault();
+        try {
+          const url = new URL(link.href, window.location.origin);
+          url.searchParams.set('photo', current);
+          window.location.href = url.toString();
+        } catch (e) {
+          window.location.href = link.href;
+        }
+      });
     });
   })();
 </script>
