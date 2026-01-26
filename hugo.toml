@@ -30,9 +30,13 @@ defaultContentLanguage = 'en'
         url = "/gallery/"
         weight = 2
       [[languages.en.menu.main]]
+        name = "Gallery 2"
+        url = "/gallery2/"
+        weight = 3
+      [[languages.en.menu.main]]
         name = "About"
         url = "/about/"
-        weight = 3
+        weight = 4
 
   [languages.es]
     languageName = "Español"
@@ -53,6 +57,10 @@ defaultContentLanguage = 'en'
         url = "/es/gallery/"
         weight = 2
       [[languages.es.menu.main]]
+        name = "Galería 2"
+        url = "/es/gallery2/"
+        weight = 3
+      [[languages.es.menu.main]]
         name = "Acerca de"
         url = "/es/about/"
-        weight = 3
+        weight = 4
