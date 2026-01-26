@@ -32,7 +32,7 @@
     .main-image-wrapper img {
       width: 100%;
       height: auto;
-      max-height: 80vh;
+      max-height: 85vh;
       object-fit: contain;
       border-radius: 0.5rem;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
@@ -144,7 +144,7 @@
       <div class="thumbnails-container">
         <div class="thumbnails" id="thumbnails">
           {{ range $index, $image := (.Resources.ByType "image") }}
-            {{ $thumbnail := .Filter (slice images.AutoOrient (images.Process "fit 1400x933")) }}
+            {{ $thumbnail := .Filter (slice images.AutoOrient (images.Process "fit 1200x800")) }}
             <div class="thumbnail" data-index="{{ $index }}" data-src="{{ $thumbnail.RelPermalink }}" onclick="selectImage({{ $index }})">
               <img src="{{ $thumbnail.RelPermalink }}" alt="{{ .Title }}" />
             </div>
