@@ -2,14 +2,6 @@
 
 A bilingual (EN/ES) photography portfolio website built with Hugo.
 
-## Features
-
-- **Responsive Gallery**: Modern slideshow gallery with thumbnail navigation
-- **Bilingual Support**: English and Spanish with seamless language switching
-- **Photo Persistence**: Maintains selected photo when switching languages
-- **Optimized Images**: Hugo processes images locally (1200x800px for web)
-- **Clean Design**: Minimalist layout with centered navigation and language flags
-
 ## Project Structure
 
 ```
@@ -27,13 +19,14 @@ chemachin/
 └── hugo.toml          # Hugo configuration
 ```
 
-## Local Development
+## Prerequisites
 
-### Prerequisites
-- Hugo (v0.150.0+)
+- Hugo v0.150.0-extended (required for SCSS processing)
 - Git
 
-### Setup
+The site uses the [Hugo Gallery Theme](https://github.com/nicokaiser/hugo-theme-gallery/) (included as git submodule) with custom overrides for bilingual support, photo persistence via localStorage, and responsive gallery layout.
+
+## Setup
 
 ```bash
 # Clone repository
@@ -47,7 +40,7 @@ git submodule update --init --recursive
 # (1-8.jpg recommended)
 ```
 
-### Building
+## Building
 
 ```bash
 # Development server
@@ -62,36 +55,10 @@ git commit -m "your message"
 git push origin main
 ```
 
-## Image Management
-
-### Adding Photos
-
-1. Place high-resolution images (JPG/PNG) in `content/gallery/`
-2. Update `content/gallery/_index.md` and `_index.es.md` with photo metadata
-3. Hugo automatically processes and optimizes images for web (1200x800px)
-
-### Image Protection
-
-- Original images in `content/gallery/` are **not committed to git** (see `.gitignore`)
-- Only optimized versions are published on the website
-- This keeps your repository clean and protects original file sizes
-
-## Customization
-
-### Navigation
-Edit `layouts/partials/header.html` to modify menu items or language switcher.
-
-### Styles
-Edit `assets/css/custom.scss` for custom CSS (background logo, colors, etc.).
-
-### Content
-- English: `content/` files (default)
-- Spanish: Add `.es.md` suffix to translations
-
 ## Deployment
 
 The site is deployed to GitHub Pages (https://chemachin.es) via commits to `main` branch. The `docs/` folder contains the published site.
 
 ## License
 
-© 2024 Chemachin. All rights reserved.
+© 2026 Chemachin. All rights reserved.
