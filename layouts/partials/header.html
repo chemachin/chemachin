@@ -124,17 +124,38 @@
     const KEY = 'galleryPhotoIndex';
     const langLinks = document.querySelectorAll('.lang-switcher a');
 
-    function storeCurrentFromGlobal() {
+    function getCurrentIndex() {
+      // First try to get from global variable
       if (typeof window.currentPhotoIndex === 'number') {
-        try { localStorage.setItem(KEY, window.currentPhotoIndex); } catch (e) {}
+        return window.currentPhotoIndex;
+      }
+      // Fallback: read from localStorage
+      try {
+        const stored = localStorage.getItem(KEY);
+        if (stored !== null) {
+          return parseInt(stored, 10);
+        }
+      } catch (e) {}
+      return null;
+    }
+
+    function storeCurrentIndex(index) {
+      if (index !== null && Number.isFinite(index)) {
+        try { 
+          localStorage.setItem(KEY, index); 
+          console.log('Stored photo index:', index);
+        } catch (e) {
+          console.error('Failed to store index', e);
+        }
       }
     }
 
-    // On click, store the current index then navigate (prevent default to ensure storage completes)
+    // On click, store the current index then navigate
     langLinks.forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
-        storeCurrentFromGlobal();
+        const currentIndex = getCurrentIndex();
+        storeCurrentIndex(currentIndex);
         // Small delay to ensure localStorage write completes
         setTimeout(() => {
           window.location.href = link.href;

@@ -146,9 +146,29 @@
     const KEY = 'galleryPhotoIndex';
     const langLinks = document.querySelectorAll('.lang-switcher a');
 
-    function storeCurrentFromGlobal() {
+    function getCurrentIndex() {
+      
       if (typeof window.currentPhotoIndex === 'number') {
-        try { localStorage.setItem(KEY, window.currentPhotoIndex); } catch (e) {}
+        return window.currentPhotoIndex;
+      }
+      
+      try {
+        const stored = localStorage.getItem(KEY);
+        if (stored !== null) {
+          return parseInt(stored, 10);
+        }
+      } catch (e) {}
+      return null;
+    }
+
+    function storeCurrentIndex(index) {
+      if (index !== null && Number.isFinite(index)) {
+        try { 
+          localStorage.setItem(KEY, index); 
+          console.log('Stored photo index:', index);
+        } catch (e) {
+          console.error('Failed to store index', e);
+        }
       }
     }
 
@@ -156,7 +176,8 @@
     langLinks.forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
-        storeCurrentFromGlobal();
+        const currentIndex = getCurrentIndex();
+        storeCurrentIndex(currentIndex);
         
         setTimeout(() => {
           window.location.href = link.href;
