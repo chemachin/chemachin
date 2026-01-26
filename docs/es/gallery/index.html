@@ -330,10 +330,24 @@
       const thumbnails = document.querySelectorAll('.thumbnail');
       const mainImage = document.getElementById('main-image');
 
+      function getPhotoParam() {
+        const params = new URLSearchParams(window.location.search);
+        const p = parseInt(params.get('photo'), 10);
+        return Number.isFinite(p) && p >= 1 && p <= thumbnails.length ? p - 1 : 0;
+      }
+
+      function setPhotoParam(index) {
+        const params = new URLSearchParams(window.location.search);
+        params.set('photo', index + 1);
+        const newUrl = `${window.location.pathname}?${params.toString()}`;
+        window.history.replaceState({}, '', newUrl);
+      }
+
       
       function init() {
         if (thumbnails.length > 0) {
-          selectImage(0);
+          const startIndex = getPhotoParam();
+          selectImage(startIndex);
         }
       }
 
@@ -350,6 +364,9 @@
         
         
         thumbnail.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+
+        
+        setPhotoParam(currentIndex);
       }
 
       function changeImage(direction) {
@@ -365,6 +382,21 @@
 
       
       init();
+
+      
+      const langLinks = document.querySelectorAll('.lang-switcher a');
+      function updateLangLinks() {
+        langLinks.forEach(link => {
+          try {
+            const url = new URL(link.href, window.location.origin);
+            url.searchParams.set('photo', currentIndex + 1);
+            link.href = url.toString();
+          } catch (e) {
+             
+          }
+        });
+      }
+      updateLangLinks();
     </script>
   
   
