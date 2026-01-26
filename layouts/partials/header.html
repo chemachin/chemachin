@@ -130,10 +130,15 @@
       }
     }
 
-    // On click, store the current index (if available) then go to link (no query params)
+    // On click, store the current index then navigate (prevent default to ensure storage completes)
     langLinks.forEach(link => {
-      link.addEventListener('click', () => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
         storeCurrentFromGlobal();
+        // Small delay to ensure localStorage write completes
+        setTimeout(() => {
+          window.location.href = link.href;
+        }, 50);
       });
     });
   })();

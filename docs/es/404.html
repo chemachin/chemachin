@@ -154,8 +154,13 @@
 
     
     langLinks.forEach(link => {
-      link.addEventListener('click', () => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
         storeCurrentFromGlobal();
+        
+        setTimeout(() => {
+          window.location.href = link.href;
+        }, 50);
       });
     });
   })();
