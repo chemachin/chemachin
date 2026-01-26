@@ -198,7 +198,7 @@
     .main-image-wrapper {
       position: relative;
       width: 100%;
-      cursor: zoom-in;
+      cursor: pointer;
     }
 
     .main-image-wrapper img {
@@ -290,87 +290,6 @@
       object-fit: cover;
     }
 
-     
-    .lightbox {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.95);
-      animation: fadeIn 0.3s;
-    }
-
-    .lightbox.active {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .lightbox-content {
-      position: relative;
-      max-width: 90vw;
-      max-height: 90vh;
-      animation: zoomIn 0.3s;
-    }
-
-    .lightbox-content img {
-      max-width: 100%;
-      max-height: 90vh;
-      height: auto;
-      width: auto;
-      border-radius: 0.5rem;
-      object-fit: contain;
-    }
-
-    .lightbox-close {
-      position: absolute;
-      top: -40px;
-      right: 0;
-      color: white;
-      font-size: 2.5rem;
-      cursor: pointer;
-      z-index: 1001;
-      background: rgba(0, 0, 0, 0.5);
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-    }
-
-    .lightbox-close:hover {
-      background: rgba(0, 0, 0, 0.8);
-    }
-
-    .lightbox-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      color: white;
-      font-size: 2rem;
-      cursor: pointer;
-      background: rgba(0, 0, 0, 0.5);
-      padding: 15px 20px;
-      border-radius: 5px;
-      z-index: 1001;
-    }
-
-    .lightbox-prev {
-      left: 20px;
-    }
-
-    .lightbox-next {
-      right: 20px;
-    }
-
-    .lightbox-nav:hover {
-      background: rgba(0, 0, 0, 0.8);
-    }
-
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
@@ -387,7 +306,7 @@
       
       <div class="main-image-container">
         <button class="nav-arrow prev" onclick="changeImage(-1)">&#10094;</button>
-        <div class="main-image-wrapper" onclick="openLightbox()">
+        <div class="main-image-wrapper" onclick="changeImage(1)">
           <img id="main-image" src="" alt="" />
         </div>
         <button class="nav-arrow next" onclick="changeImage(1)">&#10095;</button>
@@ -398,50 +317,42 @@
         <div class="thumbnails" id="thumbnails">
           
             
-            
-            <div class="thumbnail" data-index="0" data-src="/gallery2/1_hu_89922805cc41afb7.jpg" data-watermarked="/gallery-watermarked/1.jpg" onclick="selectImage( 0 )">
+            <div class="thumbnail" data-index="0" data-src="/gallery2/1_hu_89922805cc41afb7.jpg" onclick="selectImage( 0 )">
               <img src="/gallery2/1_hu_89922805cc41afb7.jpg" alt="Photo 1" />
             </div>
           
             
-            
-            <div class="thumbnail" data-index="1" data-src="/gallery2/2_hu_295d07c726c2fc62.jpg" data-watermarked="/gallery-watermarked/2.jpg" onclick="selectImage( 1 )">
+            <div class="thumbnail" data-index="1" data-src="/gallery2/2_hu_295d07c726c2fc62.jpg" onclick="selectImage( 1 )">
               <img src="/gallery2/2_hu_295d07c726c2fc62.jpg" alt="Photo 2" />
             </div>
           
             
-            
-            <div class="thumbnail" data-index="2" data-src="/gallery2/3_hu_72c8bcc938c77ab5.jpg" data-watermarked="/gallery-watermarked/3.jpg" onclick="selectImage( 2 )">
+            <div class="thumbnail" data-index="2" data-src="/gallery2/3_hu_72c8bcc938c77ab5.jpg" onclick="selectImage( 2 )">
               <img src="/gallery2/3_hu_72c8bcc938c77ab5.jpg" alt="Photo 3" />
             </div>
           
             
-            
-            <div class="thumbnail" data-index="3" data-src="/gallery2/4_hu_60c74b6439693c48.jpg" data-watermarked="/gallery-watermarked/4.jpg" onclick="selectImage( 3 )">
+            <div class="thumbnail" data-index="3" data-src="/gallery2/4_hu_60c74b6439693c48.jpg" onclick="selectImage( 3 )">
               <img src="/gallery2/4_hu_60c74b6439693c48.jpg" alt="Photo 4" />
             </div>
           
             
-            
-            <div class="thumbnail" data-index="4" data-src="/gallery2/5_hu_add6a2b412472f23.jpg" data-watermarked="/gallery-watermarked/5.jpg" onclick="selectImage( 4 )">
+            <div class="thumbnail" data-index="4" data-src="/gallery2/5_hu_add6a2b412472f23.jpg" onclick="selectImage( 4 )">
               <img src="/gallery2/5_hu_add6a2b412472f23.jpg" alt="Photo 5" />
             </div>
           
             
-            
-            <div class="thumbnail" data-index="5" data-src="/gallery2/6_hu_cfc1c957b6cb0312.jpg" data-watermarked="/gallery-watermarked/6.jpg" onclick="selectImage( 5 )">
+            <div class="thumbnail" data-index="5" data-src="/gallery2/6_hu_cfc1c957b6cb0312.jpg" onclick="selectImage( 5 )">
               <img src="/gallery2/6_hu_cfc1c957b6cb0312.jpg" alt="Photo 6" />
             </div>
           
             
-            
-            <div class="thumbnail" data-index="6" data-src="/gallery2/7_hu_f5e23f7fcf98cca4.jpg" data-watermarked="/gallery-watermarked/7.jpg" onclick="selectImage( 6 )">
+            <div class="thumbnail" data-index="6" data-src="/gallery2/7_hu_f5e23f7fcf98cca4.jpg" onclick="selectImage( 6 )">
               <img src="/gallery2/7_hu_f5e23f7fcf98cca4.jpg" alt="Photo 7" />
             </div>
           
             
-            
-            <div class="thumbnail" data-index="7" data-src="/gallery2/8_hu_c3a9d94e49f5415f.jpg" data-watermarked="/gallery-watermarked/8.jpg" onclick="selectImage( 7 )">
+            <div class="thumbnail" data-index="7" data-src="/gallery2/8_hu_c3a9d94e49f5415f.jpg" onclick="selectImage( 7 )">
               <img src="/gallery2/8_hu_c3a9d94e49f5415f.jpg" alt="Photo 8" />
             </div>
           
@@ -449,22 +360,10 @@
       </div>
     </div>
 
-    
-    <div id="lightbox" class="lightbox">
-      <div class="lightbox-content">
-        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-        <span class="lightbox-nav lightbox-prev" onclick="prevImageLightbox()">&#10094;</span>
-        <img id="lightbox-img" src="" alt="">
-        <span class="lightbox-nav lightbox-next" onclick="nextImageLightbox()">&#10095;</span>
-      </div>
-    </div>
-
     <script>
       let currentIndex = 0;
       const thumbnails = document.querySelectorAll('.thumbnail');
       const mainImage = document.getElementById('main-image');
-      const lightbox = document.getElementById('lightbox');
-      const lightboxImg = document.getElementById('lightbox-img');
 
       
       function init() {
@@ -493,45 +392,10 @@
         selectImage(currentIndex);
       }
 
-      function openLightbox() {
-        const thumbnail = thumbnails[currentIndex];
-        lightboxImg.src = thumbnail.getAttribute('data-watermarked');
-        lightbox.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      }
-
-      function closeLightbox() {
-        lightbox.classList.remove('active');
-        document.body.style.overflow = '';
-      }
-
-      function nextImageLightbox() {
-        changeImage(1);
-        const thumbnail = thumbnails[currentIndex];
-        lightboxImg.src = thumbnail.getAttribute('data-watermarked');
-      }
-
-      function prevImageLightbox() {
-        changeImage(-1);
-        const thumbnail = thumbnails[currentIndex];
-        lightboxImg.src = thumbnail.getAttribute('data-watermarked');
-      }
-
-      
-      lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) closeLightbox();
-      });
-
       
       document.addEventListener('keydown', (e) => {
-        if (lightbox.classList.contains('active')) {
-          if (e.key === 'ArrowRight') nextImageLightbox();
-          if (e.key === 'ArrowLeft') prevImageLightbox();
-          if (e.key === 'Escape') closeLightbox();
-        } else {
-          if (e.key === 'ArrowRight') changeImage(1);
-          if (e.key === 'ArrowLeft') changeImage(-1);
-        }
+        if (e.key === 'ArrowRight') changeImage(1);
+        if (e.key === 'ArrowLeft') changeImage(-1);
       });
 
       
