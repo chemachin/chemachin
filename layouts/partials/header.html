@@ -119,44 +119,21 @@
   </nav>
 </header>
 <script>
-  // Propagate current photo param to language links and enforce it on click
+  // Keep current photo across languages without showing it in the URL (uses localStorage)
   (function() {
-    const params = new URLSearchParams(window.location.search);
-    const initialPhoto = params.get('photo');
+    const KEY = 'galleryPhotoIndex';
     const langLinks = document.querySelectorAll('.lang-switcher a');
 
-    function photoValue() {
+    function storeCurrentFromGlobal() {
       if (typeof window.currentPhotoIndex === 'number') {
-        return window.currentPhotoIndex + 1;
+        try { localStorage.setItem(KEY, window.currentPhotoIndex); } catch (e) {}
       }
-      const p = new URLSearchParams(window.location.search).get('photo');
-      return p;
     }
 
-    // Set hrefs on load (in case we navigate without clicking)
-    if (initialPhoto) {
-      langLinks.forEach(link => {
-        try {
-          const url = new URL(link.href, window.location.origin);
-          url.searchParams.set('photo', initialPhoto);
-          link.href = url.toString();
-        } catch (e) { /* ignore */ }
-      });
-    }
-
-    // Intercept clicks to force current photo param
+    // On click, store the current index (if available) then go to link (no query params)
     langLinks.forEach(link => {
-      link.addEventListener('click', (evt) => {
-        const current = photoValue();
-        if (!current) return; // fallback to default behavior
-        evt.preventDefault();
-        try {
-          const url = new URL(link.href, window.location.origin);
-          url.searchParams.set('photo', current);
-          window.location.href = url.toString();
-        } catch (e) {
-          window.location.href = link.href;
-        }
+      link.addEventListener('click', () => {
+        storeCurrentFromGlobal();
       });
     });
   })();

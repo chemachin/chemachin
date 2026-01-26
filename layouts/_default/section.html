@@ -126,24 +126,21 @@
       let currentIndex = 0;
       const thumbnails = document.querySelectorAll('.thumbnail');
       const mainImage = document.getElementById('main-image');
+      const STORAGE_KEY = 'galleryPhotoIndex';
 
-      function getPhotoParam() {
-        const params = new URLSearchParams(window.location.search);
-        const p = parseInt(params.get('photo'), 10);
-        return Number.isFinite(p) && p >= 1 && p <= thumbnails.length ? p - 1 : 0;
+      function getStoredIndex() {
+        const v = parseInt(localStorage.getItem(STORAGE_KEY), 10);
+        return Number.isFinite(v) && v >= 0 && v < thumbnails.length ? v : 0;
       }
 
-      function setPhotoParam(index) {
-        const params = new URLSearchParams(window.location.search);
-        params.set('photo', index + 1);
-        const newUrl = `${window.location.pathname}?${params.toString()}`;
-        window.history.replaceState({}, '', newUrl);
+      function setStoredIndex(index) {
+        try { localStorage.setItem(STORAGE_KEY, index); } catch (e) { /* ignore */ }
       }
 
-      // Initialize with URL param or first image
+      // Initialize with stored index or first image
       function init() {
         if (thumbnails.length > 0) {
-          const startIndex = getPhotoParam();
+          const startIndex = getStoredIndex();
           selectImage(startIndex);
         }
       }
@@ -163,11 +160,8 @@
         // Scroll thumbnail into view
         thumbnail.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
 
-        // Persist selection in URL for language switch
-        setPhotoParam(currentIndex);
-
-        // Update language links to keep current photo
-        updateLangLinks();
+        // Persist selection locally for language switch
+        setStoredIndex(currentIndex);
       }
 
       function changeImage(direction) {
@@ -185,19 +179,8 @@
       init();
 
       // Propagate current photo to language switch links
-      const langLinks = document.querySelectorAll('.lang-switcher a');
-      function updateLangLinks() {
-        langLinks.forEach(link => {
-          try {
-            const url = new URL(link.href, window.location.origin);
-            url.searchParams.set('photo', currentIndex + 1);
-            link.href = url.toString();
-          } catch (e) {
-            /* ignore malformed links */
-          }
-        });
-      }
-      updateLangLinks();
+      // Expose current index globally (used by header if needed)
+      window.currentPhotoIndex = currentIndex;
     </script>
   {{ end }}
   

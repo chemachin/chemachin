@@ -161,42 +161,19 @@
 <script>
   
   (function() {
-    const params = new URLSearchParams(window.location.search);
-    const initialPhoto = params.get('photo');
+    const KEY = 'galleryPhotoIndex';
     const langLinks = document.querySelectorAll('.lang-switcher a');
 
-    function photoValue() {
+    function storeCurrentFromGlobal() {
       if (typeof window.currentPhotoIndex === 'number') {
-        return window.currentPhotoIndex + 1;
+        try { localStorage.setItem(KEY, window.currentPhotoIndex); } catch (e) {}
       }
-      const p = new URLSearchParams(window.location.search).get('photo');
-      return p;
-    }
-
-    
-    if (initialPhoto) {
-      langLinks.forEach(link => {
-        try {
-          const url = new URL(link.href, window.location.origin);
-          url.searchParams.set('photo', initialPhoto);
-          link.href = url.toString();
-        } catch (e) {   }
-      });
     }
 
     
     langLinks.forEach(link => {
-      link.addEventListener('click', (evt) => {
-        const current = photoValue();
-        if (!current) return; 
-        evt.preventDefault();
-        try {
-          const url = new URL(link.href, window.location.origin);
-          url.searchParams.set('photo', current);
-          window.location.href = url.toString();
-        } catch (e) {
-          window.location.href = link.href;
-        }
+      link.addEventListener('click', () => {
+        storeCurrentFromGlobal();
       });
     });
   })();
@@ -372,24 +349,21 @@
       let currentIndex = 0;
       const thumbnails = document.querySelectorAll('.thumbnail');
       const mainImage = document.getElementById('main-image');
+      const STORAGE_KEY = 'galleryPhotoIndex';
 
-      function getPhotoParam() {
-        const params = new URLSearchParams(window.location.search);
-        const p = parseInt(params.get('photo'), 10);
-        return Number.isFinite(p) && p >= 1 && p <= thumbnails.length ? p - 1 : 0;
+      function getStoredIndex() {
+        const v = parseInt(localStorage.getItem(STORAGE_KEY), 10);
+        return Number.isFinite(v) && v >= 0 && v < thumbnails.length ? v : 0;
       }
 
-      function setPhotoParam(index) {
-        const params = new URLSearchParams(window.location.search);
-        params.set('photo', index + 1);
-        const newUrl = `${window.location.pathname}?${params.toString()}`;
-        window.history.replaceState({}, '', newUrl);
+      function setStoredIndex(index) {
+        try { localStorage.setItem(STORAGE_KEY, index); } catch (e) {   }
       }
 
       
       function init() {
         if (thumbnails.length > 0) {
-          const startIndex = getPhotoParam();
+          const startIndex = getStoredIndex();
           selectImage(startIndex);
         }
       }
@@ -410,10 +384,7 @@
         thumbnail.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
 
         
-        setPhotoParam(currentIndex);
-
-        
-        updateLangLinks();
+        setStoredIndex(currentIndex);
       }
 
       function changeImage(direction) {
@@ -431,19 +402,8 @@
       init();
 
       
-      const langLinks = document.querySelectorAll('.lang-switcher a');
-      function updateLangLinks() {
-        langLinks.forEach(link => {
-          try {
-            const url = new URL(link.href, window.location.origin);
-            url.searchParams.set('photo', currentIndex + 1);
-            link.href = url.toString();
-          } catch (e) {
-             
-          }
-        });
-      }
-      updateLangLinks();
+      
+      window.currentPhotoIndex = currentIndex;
     </script>
   
   
