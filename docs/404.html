@@ -138,6 +138,23 @@
     </div>
   </nav>
 </header>
+<script>
+  
+  (function() {
+    const params = new URLSearchParams(window.location.search);
+    const photo = params.get('photo');
+    if (!photo) return;
+    document.querySelectorAll('.lang-switcher a').forEach(link => {
+      try {
+        const url = new URL(link.href, window.location.origin);
+        url.searchParams.set('photo', photo);
+        link.href = url.toString();
+      } catch (e) {
+         
+      }
+    });
+  })();
+</script>
 
     <main>
       
