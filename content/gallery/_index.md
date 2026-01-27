@@ -58,7 +58,7 @@ weight = 7
 
 [[resources]]
 src = "8.jpg"
-title = "Katara"
+title = "Katara Festival"
 [resources.params]
 link = "https://www.instagram.com/katara.fest.music/"
 weight = 8
