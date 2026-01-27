@@ -9,7 +9,7 @@ publishResources = false
 
 [[resources]]
 src = "1.jpg"
-title = "Photo 1"
+title = "Funambulista"
 weight = 1
 
 [[resources]]
