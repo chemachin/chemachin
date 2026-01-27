@@ -8,56 +8,56 @@ sort_by = "Params.weight"
 publishResources = false
 
 [[resources]]
-src = "1.jpg"
+src = "001.jpg"
 title = "Funambulista"
 [resources.params]
 link = "https://www.instagram.com/funambulista/"
 weight = 1
 
 [[resources]]
-src = "2.jpg"
+src = "002.jpg"
 title = "Coti"
 [resources.params]
 link = "https://www.instagram.com/cotioficial/"
 weight = 2
 
 [[resources]]
-src = "3.jpg"
+src = "003.jpg"
 title = "Coti"
 [resources.params]
 link = "https://www.instagram.com/cotioficial/"
 weight = 3
 
 [[resources]]
-src = "4.jpg"
+src = "004.jpg"
 title = "Pulpo"
 [resources.params]
 link = "https://www.instagram.com/elpulpo_oficial/"
 weight = 4
 
 [[resources]]
-src = "5.jpg"
+src = "005.jpg"
 title = "Kumbhala Festival"
 [resources.params]
 link = "https://www.instagram.com/kumbhalafestival/"
 weight = 5
 
 [[resources]]
-src = "6.jpg"
+src = "006.jpg"
 title = "Omar Ojha"
 [resources.params]
 link = "https://www.instagram.com/omarojha/"
 weight = 6
 
 [[resources]]
-src = "7.jpg"
+src = "007.jpg"
 title = "Mystic Flow"
 [resources.params]
 link = "https://www.instagram.com/mystic.flow.ritual/"
 weight = 7
 
 [[resources]]
-src = "8.jpg"
+src = "008.jpg"
 title = "Katara Festival"
 [resources.params]
 link = "https://www.instagram.com/katara.fest.music/"
