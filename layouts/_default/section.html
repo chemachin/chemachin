@@ -1,5 +1,7 @@
 {{ define "main" }}
-  {{ partial "title.html" . }}
+  {{ if ne .Type "gallery" }}
+    {{ partial "title.html" . }}
+  {{ end }}
   
   <style>
     /* Main gallery viewer */
