@@ -5,3 +5,28 @@ body {
   background-repeat: no-repeat !important;
   background-attachment: fixed !important;
 }
+/* Social icon hover brand colors */
+.social-icons a {
+  color: inherit;
+  transition: color 0.2s ease-in-out;
+}
+
+.social-icons a[title="Instagram"]:hover,
+.social-icons a[title="Instagram"]:focus {
+  color: #E4405F;
+}
+
+.social-icons a[title="LinkedIn"]:hover,
+.social-icons a[title="LinkedIn"]:focus {
+  color: #0A66C2;
+}
+
+.social-icons a[title="GitHub"]:hover,
+.social-icons a[title="GitHub"]:focus {
+  color: #181717;
+}
+
+.social-icons a[title="E-Mail"]:hover,
+.social-icons a[title="E-Mail"]:focus {
+  color: #555555;
+}
