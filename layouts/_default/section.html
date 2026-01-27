@@ -195,14 +195,14 @@
           {{ range $index, $image := (.Resources.ByType "image") }}
             {{ $thumbnail := .Filter (slice images.AutoOrient (images.Process "fit 1200x800")) }}
             <div class="thumbnail-wrapper" data-index="{{ $index }}">
-              <div class="thumbnail" data-index="{{ $index }}" data-src="{{ $thumbnail.RelPermalink }}" data-title="{{ .Title }}" data-link="{{ .Params.link }}" onclick="selectImage({{ $index }})">
-                <img src="{{ $thumbnail.RelPermalink }}" alt="{{ .Title }}" />
-              </div>
               {{ if .Params.link }}
                 <a href="{{ .Params.link }}" target="_blank" rel="noopener" class="thumbnail-title" id="title-{{ $index }}">{{ .Title }}</a>
               {{ else }}
                 <div class="thumbnail-title" id="title-{{ $index }}">{{ .Title }}</div>
               {{ end }}
+              <div class="thumbnail" data-index="{{ $index }}" data-src="{{ $thumbnail.RelPermalink }}" data-title="{{ .Title }}" data-link="{{ .Params.link }}" onclick="selectImage({{ $index }})">
+                <img src="{{ $thumbnail.RelPermalink }}" alt="{{ .Title }}" />
+              </div>
             </div>
           {{ end }}
         </div>
