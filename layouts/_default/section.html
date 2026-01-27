@@ -209,7 +209,6 @@
       let currentIndex = 0;
       const thumbnails = document.querySelectorAll('.thumbnail');
       const mainImage = document.getElementById('main-image');
-      const photoTitle = document.getElementById('photo-title');
       const STORAGE_KEY = 'galleryPhotoIndex';
 
       function getStoredIndex() {
@@ -236,20 +235,6 @@
         
         // Update main image
         mainImage.src = thumbnail.getAttribute('data-src');
-        
-        // Update photo title with optional link
-        const title = thumbnail.getAttribute('data-title');
-        const link = thumbnail.getAttribute('data-link');
-        
-        if (title) {
-          if (link) {
-            photoTitle.innerHTML = `<a href="${link}" target="_blank" rel="noopener">${title}</a>`;
-          } else {
-            photoTitle.textContent = title;
-          }
-        } else {
-          photoTitle.textContent = '';
-        }
         
         // Update active thumbnail and wrapper
         const wrappers = document.querySelectorAll('.thumbnail-wrapper');
