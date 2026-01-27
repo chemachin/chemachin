@@ -23,16 +23,16 @@ weight = 2
 
 [[resources]]
 src = "3.jpg"
-title = "Pulpo"
+title = "Coti"
 [resources.params]
-link = "https://www.instagram.com/elpulpo_oficial/"
+link = "https://www.instagram.com/cotioficial/"
 weight = 3
 
 [[resources]]
 src = "4.jpg"
-title = "Coti"
+title = "Pulpo"
 [resources.params]
-link = "https://www.instagram.com/cotioficial/"
+link = "https://www.instagram.com/elpulpo_oficial/"
 weight = 4
 
 [[resources]]
