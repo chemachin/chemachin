@@ -16,36 +16,50 @@ weight = 1
 
 [[resources]]
 src = "2.jpg"
-title = "Photo 2"
+title = "Coti"
+[resources.params]
+link = "https://www.instagram.com/cotioficial/"
 weight = 2
 
 [[resources]]
 src = "3.jpg"
-title = "Photo 3"
+title = "Pulpo"
+[resources.params]
+link = "https://www.instagram.com/elpulpo_oficial/"
 weight = 3
 
 [[resources]]
 src = "4.jpg"
-title = "Photo 4"
+title = "Coti"
+[resources.params]
+link = "https://www.instagram.com/cotioficial/"
 weight = 4
 
 [[resources]]
 src = "5.jpg"
-title = "Photo 5"
+title = "Kumbhala Festival"
+[resources.params]
+link = "https://www.instagram.com/kumbhalafestival/"
 weight = 5
 
 [[resources]]
 src = "6.jpg"
-title = "Photo 6"
+title = "Omar Ojha"
+[resources.params]
+link = "https://www.instagram.com/omarojha/"
 weight = 6
 
 [[resources]]
 src = "7.jpg"
-title = "Photo 7"
+title = "Mystic Flow"
+[resources.params]
+link = "https://www.instagram.com/mystic.flow.ritual/"
 weight = 7
 
 [[resources]]
 src = "8.jpg"
-title = "Photo 8"
+title = "Katara"
+[resources.params]
+link = "https://www.instagram.com/katara.fest.music/"
 weight = 8
 +++
