@@ -38,6 +38,18 @@
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     }
 
+    /* Photo title */
+    .photo-title {
+      text-align: center;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--text-1);
+      margin-top: 0.75rem;
+      margin-bottom: 0.5rem;
+      min-height: 1.5rem;
+      opacity: 0.9;
+    }
+
     /* Navigation arrows (hidden) */
     .nav-arrow { display: none; }
 
@@ -109,12 +121,15 @@
         <button class="nav-arrow next" onclick="changeImage(1)">&#10095;</button>
       </div>
 
+      <!-- Photo title -->
+      <div class="photo-title" id="photo-title"></div>
+
       <!-- Thumbnails -->
       <div class="thumbnails-container">
         <div class="thumbnails" id="thumbnails">
           {{ range $index, $image := (.Resources.ByType "image") }}
             {{ $thumbnail := .Filter (slice images.AutoOrient (images.Process "fit 1200x800")) }}
-            <div class="thumbnail" data-index="{{ $index }}" data-src="{{ $thumbnail.RelPermalink }}" onclick="selectImage({{ $index }})">
+            <div class="thumbnail" data-index="{{ $index }}" data-src="{{ $thumbnail.RelPermalink }}" data-title="{{ .Title }}" onclick="selectImage({{ $index }})">
               <img src="{{ $thumbnail.RelPermalink }}" alt="{{ .Title }}" />
             </div>
           {{ end }}
@@ -126,6 +141,7 @@
       let currentIndex = 0;
       const thumbnails = document.querySelectorAll('.thumbnail');
       const mainImage = document.getElementById('main-image');
+      const photoTitle = document.getElementById('photo-title');
       const STORAGE_KEY = 'galleryPhotoIndex';
 
       function getStoredIndex() {
@@ -152,6 +168,10 @@
         
         // Update main image
         mainImage.src = thumbnail.getAttribute('data-src');
+        
+        // Update photo title
+        const title = thumbnail.getAttribute('data-title');
+        photoTitle.textContent = title || '';
         
         // Update active thumbnail
         thumbnails.forEach(t => t.classList.remove('active'));
