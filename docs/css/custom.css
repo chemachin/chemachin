@@ -23,10 +23,10 @@ body {
 
 .social-icons a[title="GitHub"]:hover,
 .social-icons a[title="GitHub"]:focus {
-  color: #999999;
+  color: #28A745;
 }
 
 .social-icons a[title="E-Mail"]:hover,
 .social-icons a[title="E-Mail"]:focus {
-  color: #E74C3C;
+  color: #FFA500;
 }
