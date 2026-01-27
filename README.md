@@ -1,4 +1,4 @@
-# Chemachin Photography Portfolio
+# Chemachin.es — Photography Portfolio
 
 A bilingual (EN/ES) photography portfolio website built with Hugo.
 
@@ -22,6 +22,8 @@ chemachin/
 ## Deployment
 
 The site is deployed to GitHub Pages (https://chemachin.es) via commits to `main` branch. The `docs/` folder contains the published site.
+
+Repository: https://github.com/chemachin/chemachin.es
 
 **Technology Stack:**
 - **Hugo v0.150.0-extended**: Static site generator with SCSS processing
