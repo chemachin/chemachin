@@ -144,13 +144,69 @@
       text-align: center;
       font-size: 0.95rem;
       font-weight: 700;
-      font-family: 'Garamond', 'Georgia', serif;
       color: #42A5F5;
       margin-top: 1.5rem;
       margin-bottom: 0.5rem;
       min-height: 1.5rem;
       letter-spacing: 0.03em;
       transition: all 0.2s;
+    }
+
+    /* Style 1: Garamond - Elegant Classic */
+    .central-photo-title.style-1 {
+      font-family: 'Garamond', 'Georgia', serif;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    /* Style 2: Playfair Display - Sophisticated */
+    .central-photo-title.style-2 {
+      font-family: 'Playfair Display', 'Georgia', serif;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      font-style: italic;
+    }
+
+    /* Style 3: Lora - Modern Elegant */
+    .central-photo-title.style-3 {
+      font-family: 'Lora', 'Georgia', serif;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    /* Style 4: Crimson Text - Classic Serif */
+    .central-photo-title.style-4 {
+      font-family: 'Crimson Text', 'Garamond', serif;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    /* Style 5: EB Garamond - Enhanced Garamond */
+    .central-photo-title.style-5 {
+      font-family: 'EB Garamond', 'Garamond', serif;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    /* Style 6: Cormorant - Decorative Elegant */
+    .central-photo-title.style-6 {
+      font-family: 'Cormorant', 'Georgia', serif;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+
+    /* Style 7: Prata - Elegant Classic */
+    .central-photo-title.style-7 {
+      font-family: 'Prata', 'Georgia', serif;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+    }
+
+    /* Style 8: Libre Baskerville - Traditional Elegance */
+    .central-photo-title.style-8 {
+      font-family: 'Libre Baskerville', 'Baskerville', serif;
+      font-weight: 700;
+      letter-spacing: 0.02em;
     }
 
     .central-photo-title a {
@@ -249,6 +305,10 @@
         } else {
           centralPhotoTitle.textContent = '';
         }
+        
+        // Apply different style to each photo (cycling through 8 styles)
+        const styleClass = `style-${(index % 8) + 1}`;
+        centralPhotoTitle.className = `central-photo-title ${styleClass}`;
         
         // Update active thumbnail and wrapper
         const wrappers = document.querySelectorAll('.thumbnail-wrapper');
