@@ -39,6 +39,30 @@
       border-radius: 0.5rem;
     }
 
+    /* Mobile responsive */
+    @media (max-width: 768px) {
+      .main-image-wrapper img {
+        max-height: 45vh;
+      }
+      
+      .photo-title {
+        font-size: 1.2rem;
+        margin-top: 0.75rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .main-image-wrapper img {
+        max-height: 40vh;
+      }
+      
+      .photo-title {
+        font-size: 1rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.25rem;
+      }
+    }
+
     /* Photo title */
     .photo-title {
       text-align: center;
