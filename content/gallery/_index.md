@@ -10,6 +10,8 @@ publishResources = false
 [[resources]]
 src = "1.jpg"
 title = "Funambulista"
+[resources.params]
+link = "https://www.instagram.com/funambulista/"
 weight = 1
 
 [[resources]]

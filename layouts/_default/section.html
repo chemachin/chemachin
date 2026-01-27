@@ -43,11 +43,21 @@
       text-align: center;
       font-size: 1.1rem;
       font-weight: 500;
-      color: var(--text-1);
+      color: #000;
       margin-top: 0.75rem;
       margin-bottom: 0.5rem;
       min-height: 1.5rem;
-      opacity: 0.9;
+    }
+
+    .photo-title a {
+      color: #000;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .photo-title a:hover {
+      opacity: 0.7;
+      text-decoration: underline;
     }
 
     /* Navigation arrows (hidden) */
@@ -129,7 +139,7 @@
         <div class="thumbnails" id="thumbnails">
           {{ range $index, $image := (.Resources.ByType "image") }}
             {{ $thumbnail := .Filter (slice images.AutoOrient (images.Process "fit 1200x800")) }}
-            <div class="thumbnail" data-index="{{ $index }}" data-src="{{ $thumbnail.RelPermalink }}" data-title="{{ .Title }}" onclick="selectImage({{ $index }})">
+            <div class="thumbnail" data-index="{{ $index }}" data-src="{{ $thumbnail.RelPermalink }}" data-title="{{ .Title }}" data-link="{{ .Params.link }}" onclick="selectImage({{ $index }})">
               <img src="{{ $thumbnail.RelPermalink }}" alt="{{ .Title }}" />
             </div>
           {{ end }}
@@ -169,9 +179,19 @@
         // Update main image
         mainImage.src = thumbnail.getAttribute('data-src');
         
-        // Update photo title
+        // Update photo title with optional link
         const title = thumbnail.getAttribute('data-title');
-        photoTitle.textContent = title || '';
+        const link = thumbnail.getAttribute('data-link');
+        
+        if (title) {
+          if (link) {
+            photoTitle.innerHTML = `<a href="${link}" target="_blank" rel="noopener">${title}</a>`;
+          } else {
+            photoTitle.textContent = title;
+          }
+        } else {
+          photoTitle.textContent = '';
+        }
         
         // Update active thumbnail
         thumbnails.forEach(t => t.classList.remove('active'));
