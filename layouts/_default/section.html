@@ -153,14 +153,21 @@
       overflow: hidden;
     }
 
+    .thumbnail-title[href] {
+      color: #FFA500;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .thumbnail-title[href]:hover {
+      color: #FFD700;
+      text-decoration: underline;
+      transform: scale(1.08);
+    }
+
     .thumbnail-wrapper.active .thumbnail-title {
       opacity: 1;
       max-height: 3rem;
-    }
-
-    .thumbnail-title:hover {
-      color: #E0E0E0;
-      text-decoration: underline;
     }
 
     .thumbnail-wrapper:hover .thumbnail-title {
