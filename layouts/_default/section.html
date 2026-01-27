@@ -63,17 +63,9 @@
       }
     }
 
-    /* Photo title */
+    /* Photo title - hidden */
     .photo-title {
-      text-align: center;
-      font-size: 1.6rem;
-      font-weight: 700;
-      font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
-      color: #2563EB;
-      margin-top: 1.5rem;
-      margin-bottom: 0.5rem;
-      min-height: 2rem;
-      letter-spacing: 0.02em;
+      display: none;
     }
 
     .photo-title a {
@@ -156,6 +148,14 @@
       line-height: 1.2;
       text-decoration: none;
       transition: all 0.2s;
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+    }
+
+    .thumbnail-wrapper.active .thumbnail-title {
+      opacity: 1;
+      max-height: 3rem;
     }
 
     .thumbnail-title:hover {
@@ -254,9 +254,12 @@
           photoTitle.textContent = '';
         }
         
-        // Update active thumbnail
+        // Update active thumbnail and wrapper
+        const wrappers = document.querySelectorAll('.thumbnail-wrapper');
         thumbnails.forEach(t => t.classList.remove('active'));
+        wrappers.forEach(w => w.classList.remove('active'));
         thumbnail.classList.add('active');
+        thumbnail.closest('.thumbnail-wrapper').classList.add('active');
         
         // Scroll thumbnail into view
         thumbnail.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
